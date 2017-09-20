@@ -4,7 +4,6 @@ import {
 	Redirect,
 } from 'react-router-dom'
 import SearchBar from './SearchBar'
-import LoadingScreen from './LoadingScreen'
 import DetailsContainer from './DetailsContainer'
 
 
@@ -14,44 +13,27 @@ class gridInstance extends React.Component {
 		super()
 
 		this.state = {
-			loading: false,
 			data: undefined
 		}
 	}
 
 	getListing = (address) => {
 		console.log('fetching')
-		this.setState({
-			loading: true,
-			data: undefined
-		})
 		fetch(`http://localhost:3000/api/v1/listings/${address}`)
 			.then(res => res.json())
 			.then(res => {
-					this.setState({
-						loading: false,
-						data: res
-					})
-					debugger
+				this.setState({
+					data: res
+				})
 			})
 	}
 
 	render() {
-		if (this.state.data === undefined && this.state.loading === false) {
-				return <Redirect to="/search"/>
-			} else if (this.state.data === undefined && this.state.loading === true) {
-				return <Redirect to="/loading"/>
-			} else {
-				return <Redirect to="/details"/>
-			}
 		return (
 			<div>
-		
-				<Route path="/search" component={() => (<SearchBar getListing={this.getListing} />)}/>
-				<Route path="/loading" component={LoadingScreen}/>
-				<Route path="/details" component={() => (<DetailsContainer />)}/>
-				
-				</div>
+				<Route path="/search" render={(props) => (<SearchBar {...props} getListing={this.getListing} />)}/>
+				<Route path="/listing" render={() => (<DetailsContainer {...this.state} />)}/>
+			</div>
 		)
 	}
 }
