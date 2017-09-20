@@ -5,15 +5,16 @@ import LoadingScreen from './LoadingScreen'
 
 
 const colors = [
-  "10 Vauxhall Road, East Brunswick, NJ 08816",
+	"10 Vauxhall Road, East Brunswick, NJ 08816",
 	'Orange',
 	'1057 Coolidge Rd, Elizabeth, NJ 07208',
+	"701 Ridge Hill Blvd UNIT 7N, Yonkers, NY 10710",
 ];
 
 class AutoCompleteExampleFilters extends React.Component {
 	constructor(props) {
 		super(props)
-		
+
 		this.state = {
 			address: ''
 		}
@@ -28,9 +29,10 @@ class AutoCompleteExampleFilters extends React.Component {
 
 	handleSubmit = () => {
 		this.props.getListing(this.state.address)
+		this.props.history.push('/listing')
 	}
 
- 
+
 	render() {
 		return (
 			<div>
