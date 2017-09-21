@@ -1,15 +1,23 @@
 import React from 'react';
 import TextField from 'material-ui/TextField';
 
-const TextFieldExampleSimple = (props) => (
-  <div>
-  <br/>
-    <TextField
-      hintText="Hint Text"
-      floatingLabelText="Fixed Floating Label Text"
-			floatingLabelFixed={true}/>
-		<br/>
-  </div>
-);
+class TextFieldExampleSimple extends React.Component {
+			
+	handleChange = (event) => {
+		this.props.changePrice(event.target.value)
+	}
+
+	render() {
+		return (
+			<div>
+				<br />
+					<TextField
+						hintText={this.props.label}
+						floatingLabelText={this.props.label}
+						onChange={this.handleChange}/><br />
+				</div>
+		)
+	}
+}
 
 export default TextFieldExampleSimple;

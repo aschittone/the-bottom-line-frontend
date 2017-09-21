@@ -23,7 +23,7 @@ export default class Map extends React.Component {
 		return (
 			<div style={{
 				width: '95%',
-				height: '450px',
+				height: '300px',
 				backgroundColor: '#eeeeee'
 			}}>
 				<ReactStreetview

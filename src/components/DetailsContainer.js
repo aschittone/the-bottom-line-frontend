@@ -5,8 +5,6 @@ import StreetView from './Map'
 import HouseDetails from './HouseDetails'
 import Analysis from './Analysis'
 
-
-
 class GridExampleCelled extends React.Component {
 	constructor(props) {
 		super(props)
