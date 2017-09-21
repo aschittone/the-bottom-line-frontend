@@ -18,6 +18,7 @@ export default class DropDownMenuLongMenuExample extends Component {
 
   handleChange = (event, index, value) => {
     this.setState({value});
+    this.props.changeMortgage(event.target.innerText)
   };
 
   render() {

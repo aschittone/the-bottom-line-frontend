@@ -8,6 +8,19 @@ import Analysis from './Analysis'
 class GridExampleCelled extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			mortgage: '',
+			purchasePrice: '',
+			downPayment: ''
+		}
+	}
+
+	submitForAnalysis = (price, mortgage, dp) => {
+		this.setState({
+			mortgage: mortgage,
+			purchasePrice: price,
+			downPayment: dp
+		})
 	}
 
 	render() {
@@ -28,10 +41,10 @@ class GridExampleCelled extends React.Component {
 
 					<Grid.Row>
 						<Grid.Column width={5}>
-							<Description {...this.props.data} />
+							<Description {...this.props.data} submitForAnalysis={this.submitForAnalysis} />
 						</Grid.Column>
 						<Grid.Column width={10}>
-							<Analysis />
+							<Analysis purchaseInfo={this.state} data={this.props.data}/>
 						</Grid.Column>
 						<Grid.Column width={3}>
 						</Grid.Column>
