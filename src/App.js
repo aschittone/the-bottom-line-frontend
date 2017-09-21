@@ -3,6 +3,7 @@ import './App.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MainDisplayContainer from './components/MainDisplayContainer'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         <div>
           <Navbar />
           <MainDisplayContainer />
+          <Footer />
         </div>
       </MuiThemeProvider>
     );

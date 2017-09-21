@@ -2,6 +2,12 @@ import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import SwipeableViews from 'react-swipeable-views';
 import Text from './Text'
+import SelectDownPayment from './SelectDownPayment'
+import SelectMortgage from './SelectMortgage'
+import Button from './Button'
+
+
+
 
 const styles = {
   headline: {
@@ -21,6 +27,9 @@ export default class TabsExampleSwipeable extends React.Component {
     super(props);
     this.state = {
       slideIndex: 0,
+      purchasePrice: '',
+      downPayment: '',
+      mortgage: ''
     };
   }
 
@@ -28,6 +37,17 @@ export default class TabsExampleSwipeable extends React.Component {
     this.setState({
       slideIndex: value,
     });
+  };
+
+  changePrice = (value) => {
+    this.setState({
+      purchasePrice: value
+    })
+    console.log(this.state.purchasePrice)
+  }
+
+  handleClick = () => {
+    debugger
   };
 
   render() {
@@ -50,9 +70,18 @@ export default class TabsExampleSwipeable extends React.Component {
             Swipe to see the next slide.<br />
           </div>
           <div style={styles.slide}>
-            <h2>Enter the additional info below for your cashflow analysis</h2>
-            <Text label="Purchase Price"/>
-                       
+            <h4>Enter the additional info below for your cashflow analysis</h4>
+            <form onSumbit={this.handleSubmit}>
+              <Text label="Purchase Price" changePrice={this.changePrice}/>
+              <br/>
+              <SelectDownPayment />
+              <br/>
+              <br/>
+              <SelectMortgage /> 
+              <br/>
+              <br/>              
+              <Button label="Calculate" handleChange={this.handleClick}/> 
+            </form>
           </div>
           <div style={styles.slide}>
             slide n°3

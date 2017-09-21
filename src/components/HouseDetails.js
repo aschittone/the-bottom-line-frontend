@@ -49,6 +49,7 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt} sqft`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
+            <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />          
           </List>
         </div>
       );
