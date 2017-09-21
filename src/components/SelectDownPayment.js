@@ -18,6 +18,7 @@ export default class DropDownMenuLongMenuExample extends Component {
 
   handleChange = (event, index, value) => {
     this.setState({value});
+    this.props.changeDP(event.target.innerText)
   };
 
   render() {

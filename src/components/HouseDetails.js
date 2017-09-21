@@ -32,6 +32,7 @@ export default class ListExampleNested extends React.Component {
         <div>
           <List>
             <Subheader>Property Details (2017)</Subheader>
+            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate.amount}`} leftIcon={<ContentSend />} />
             <ListItem primaryText="Taxes: " leftIcon={<ContentSend />} />
             <ListItem primaryText="HOA Fees: N/A" leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
@@ -45,6 +46,7 @@ export default class ListExampleNested extends React.Component {
         <div>
           <List>
             <Subheader>Property Details (2017)</Subheader>
+            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate.amount}`} leftIcon={<ContentSend />} />
             <ListItem primaryText="Taxes: " leftIcon={<ContentSend />} />
             <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt} sqft`} leftIcon={<ContentDrafts />} />

@@ -1,5 +1,9 @@
 import React from 'react';
 import { Tabs, Tab } from 'material-ui/Tabs';
+import Text from './Text'
+import SelectDownPayment from './SelectDownPayment'
+import SelectMortgage from './SelectMortgage'
+import Button from './Button'
 
 const styles = {
   headline: {
@@ -16,7 +20,11 @@ export default class TabsExampleControlled extends React.Component {
     super(props);
     this.state = {
       value: 'a',
+      purchasePrice: '',
+      downPayment: '',
+      mortgage: ''
     };
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleChange = (value) => {
@@ -25,22 +33,52 @@ export default class TabsExampleControlled extends React.Component {
     });
   };
 
+  changePrice = (value) => {
+    this.setState({
+      purchasePrice: value
+    })
+  }
+
+  changeDP = (value) => {
+    this.setState({
+      downPayment: value
+    })
+  }
+
+  changeMortgage = (value) => {
+    this.setState({
+      mortgage: value
+    })
+  }
+
+  handleClick = () => {
+    let price = this.state.purchasePrice
+    let dp = this.state.downPayment
+    let mortgage = this.state.mortgage
+    this.props.submitForAnalysis(price, mortgage, dp)
+  };
+
   render() {
     return (
-      <Tabs
-        value={this.state.value}
-        onChange={this.handleChange}
-      >
-        <Tab label="Property Valuation" value="a">
+      <Tabs value={this.state.value} onChange={this.handleChange}>
+
+
+        <Tab label="Purchase Details" value="a">
           <div>
-            <h2 style={styles.headline}>Our Estimated Value: ${this.props[0].zestimate.amount} </h2>
-            <p>
-              Tabs are also controllable if you want to programmatically pass them their values.
-              This allows for more functionality in Tabs such as not
-              having any Tab selected or assigning them different values.
-            </p>
+            <h2 style={styles.headline}>Enter the additional info below for your cashflow analysis</h2>
+            <Text label="Purchase Price" changePrice={this.changePrice} />
+            <br/>
+            <SelectDownPayment changeDP={this.changeDP}/>
+            <br/>
+            <br/>
+            <SelectMortgage changeMortgage={this.changeMortgage}/>
+            <br/>
+            <br/>
+            <Button label="Calculate" handleClick={this.handleClick} />
           </div>
         </Tab>
+
+
         <Tab label="Sale History" value="b">
           <div>
             <h2 style={styles.headline}>Controllable Tab B</h2>
@@ -51,6 +89,8 @@ export default class TabsExampleControlled extends React.Component {
             </p>
           </div>
         </Tab>
+
+
       </Tabs>
     );
   }
