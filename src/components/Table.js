@@ -5,10 +5,10 @@ const ReactDataGrid = require('react-data-grid');
 const React = require('react');
 
 class Table extends React.Component {
-  constructor(props) {
+	constructor(props) {
 		super(props)
 		this.state = {
-			columns: 
+			columns:
 			[
 				{
 					key: 'Month',
@@ -36,8 +36,13 @@ class Table extends React.Component {
 					editable: true
 				},
 				{
-					key: 'Insurance',
-					name: 'Insurance',
+					key: 'MI',
+					name: 'Mortgage Insurance',
+					editable: true
+				},
+				{
+					key: 'HOI',
+					name: 'HOI',
 					editable: true
 				},
 				{
@@ -47,26 +52,26 @@ class Table extends React.Component {
 				},
 				{
 					key: 'CashFlow',
-					name: 'Monthly Cash flow',
+					name: 'Cash flow/month',
 					editable: false
 				}
 			],
-    	rows: this.createRows(12, this.props)
+			rows: this.createRows(12, this.props)
 		}
 		this.rowGetter = this.rowGetter.bind(this)
 		this.handleGridRowsUpdated = this.handleGridRowsUpdated.bind(this)
 		this.createRows = this.createRows.bind(this)
-		
-		
+
+
 	}
-	
+
 	componentWillReceiveProps(nextProps) {
 		this.setState({
 			rows: this.createRows(12, nextProps)
 		})
 	}
 
-  createRows(numberOfRows, props) {
+	createRows(numberOfRows, props) {
 		let rows = [];
 		if (props.rowData.length < 1) {
 			for (let i = 0; i < numberOfRows; i++) {
@@ -76,66 +81,69 @@ class Table extends React.Component {
 					HOA: "-",
 					Taxes: "-",
 					MFee: "-",
-					Insurance: "-",
+					MI: "-",
+					HOI: "-",
 					Mortgage: "-",
 					CashFlow: "-"
 				});
 			}
 		} else {
-				for (let i = 0; i < numberOfRows; i++) {
-					rows.push({
-						Month: i,
-						Rent: props.rowData[1],
-						HOA: 0,
-						Taxes: props.rowData[0],
-						MFee: 0,
-						Insurance: props.rowData[2],
-						Mortgage: props.rowData[3],
-						CashFlow: props.rowData[3] + props.rowData[2] + props.rowData[1] + props.rowData[0]
-					});
+			for (let i = 0; i < numberOfRows; i++) {
+				rows.push({
+					Month: i + 1,
+					Rent: props.rent,
+					HOA: props.rowData[5],
+					Taxes: props.rowData[0],
+					MFee: 0,
+					MI: props.rowData[2],
+					HOI: props.rowData[4],
+					Mortgage: props.rowData[3],
+					CashFlow: props.rent - (props.rowData[0] + props.rowData[2] + props.rowData[3] + props.rowData[4] + props.rowData[5])
+				});
 			}
 		}
-    return rows;
-  }
+		return rows;
+	}
 
-  rowGetter(i) {
-    return this.state.rows[i];
-  }
+	rowGetter(i) {
+		this.props.dataChange(this.state.rows)
+		return this.state.rows[i];
+	}
 
-  handleGridRowsUpdated({ fromRow, toRow, updated }) {
-    let rows = this.state.rows;
+	handleGridRowsUpdated({ fromRow, toRow, updated }) {
+		let rows = this.state.rows;
 
-    for (let i = fromRow; i <= toRow; i++) {
+		for (let i = fromRow; i <= toRow; i++) {
 			let rowToUpdate = rows[i];
-      let updatedRow = update(rowToUpdate, {$merge: updated});
+			let updatedRow = update(rowToUpdate, { $merge: updated });
 			for (let key in updated) {
 				let num = parseInt(updated[key])
 				if (rowToUpdate[key] < num && key === "Rent") {
 					updatedRow.CashFlow += num - rowToUpdate[key]
 				} else if (rowToUpdate[key] > num && key === "Rent") {
-					updatedRow.CashFlow -= rowToUpdate[key] - num	
+					updatedRow.CashFlow -= rowToUpdate[key] - num
 				} else if (rowToUpdate[key] < num && key !== "Rent") {
-					updatedRow.CashFlow -= num - rowToUpdate[key] 		
+					updatedRow.CashFlow -= num - rowToUpdate[key]
 				} else if (rowToUpdate[key] > num && key !== "Rent") {
-					updatedRow.CashFlow += rowToUpdate[key] - num					
+					updatedRow.CashFlow += rowToUpdate[key] - num
 				}
-			rows[i] = updatedRow;
+				rows[i] = updatedRow;
 			}
 		}
-    this.setState({ rows });
-  }
+		this.setState({ rows });
+	}
 
-  render() {
-		
-    return  (
-      <ReactDataGrid
-        enableCellSelect={true}
-        columns={this.state.columns}
-        rowGetter={this.rowGetter}
-        rowsCount={this.state.rows.length}
-        minHeight={500}
-        onGridRowsUpdated={this.handleGridRowsUpdated} />);
-  }
+	render() {
+
+		return (
+			<ReactDataGrid
+				enableCellSelect={true}
+				columns={this.state.columns}
+				rowGetter={this.rowGetter}
+				rowsCount={this.state.rows.length}
+				minHeight={500}
+				onGridRowsUpdated={this.handleGridRowsUpdated} />);
+	}
 }
 
 

@@ -4,6 +4,7 @@ import Text from './Text'
 import SelectDownPayment from './SelectDownPayment'
 import SelectMortgage from './SelectMortgage'
 import Button from './Button'
+import { Grid } from 'semantic-ui-react'
 
 const styles = {
   headline: {
@@ -22,7 +23,9 @@ export default class TabsExampleControlled extends React.Component {
       value: 'a',
       purchasePrice: '',
       downPayment: '',
-      mortgage: ''
+      mortgage: '',
+      HOA: '',
+      HOI: ''
     };
     this.handleClick = this.handleClick.bind(this)
   }
@@ -36,6 +39,18 @@ export default class TabsExampleControlled extends React.Component {
   changePrice = (value) => {
     this.setState({
       purchasePrice: value
+    })
+  }
+
+  changeHOA = (value) => {
+    this.setState({
+      HOA: value
+    })
+  }
+
+  changeHOI = (value) => {
+    this.setState({
+      HOI: value
     })
   }
 
@@ -55,7 +70,9 @@ export default class TabsExampleControlled extends React.Component {
     let price = this.state.purchasePrice
     let dp = this.state.downPayment
     let mortgage = this.state.mortgage
-    this.props.submitForAnalysis(price, mortgage, dp)
+    let HOI = parseInt(this.state.HOI)
+    let HOA = parseInt(this.state.HOA)
+    this.props.submitForAnalysis(price, mortgage, dp, HOI, HOA)
   };
 
   render() {
@@ -66,15 +83,37 @@ export default class TabsExampleControlled extends React.Component {
         <Tab label="Purchase Details" value="a">
           <div>
             <h2 style={styles.headline}>Enter the additional info below for your cashflow analysis</h2>
-            <Text label="Purchase Price" changePrice={this.changePrice} />
-            <br/>
-            <SelectDownPayment changeDP={this.changeDP}/>
-            <br/>
-            <br/>
-            <SelectMortgage changeMortgage={this.changeMortgage}/>
-            <br/>
-            <br/>
-            <Button label="Calculate" handleClick={this.handleClick} />
+
+
+            <Grid padded relaxed>
+              <Grid.Row>
+                <Grid.Column width={8}>
+                  <Text label="Purchase Price" handleChange={this.changePrice} />
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Text label="HOA Fees/month (if applicable)" handleChange={this.changeHOA} />
+                </Grid.Column>
+              </Grid.Row>
+
+              <Grid.Row>
+                <Grid.Column width={8}>
+                  <SelectDownPayment changeDP={this.changeDP} />
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Text label="Homeowner's Insurance/month" handleChange={this.changeHOI} />
+                </Grid.Column>
+              </Grid.Row>
+
+              <Grid.Row>
+                <Grid.Column width={8}>
+                  <SelectMortgage changeMortgage={this.changeMortgage} />
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <Button label="Calculate" handleClick={this.handleClick} />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+
           </div>
         </Tab>
 
