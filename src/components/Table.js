@@ -71,14 +71,14 @@ class Table extends React.Component {
 		if (props.rowData.length < 1) {
 			for (let i = 0; i < numberOfRows; i++) {
 				rows.push({
-					Month: i,
-					Rent: 0,
-					HOA: 0,
-					Taxes: 0,
-					MFee: 0,
-					Insurance: 0,
-					Mortgage: 0,
-					CashFlow: 0
+					Month: i + 1,
+					Rent: "-",
+					HOA: "-",
+					Taxes: "-",
+					MFee: "-",
+					Insurance: "-",
+					Mortgage: "-",
+					CashFlow: "-"
 				});
 			}
 		} else {
@@ -107,18 +107,22 @@ class Table extends React.Component {
 
     for (let i = fromRow; i <= toRow; i++) {
 			let rowToUpdate = rows[i];
-			
       let updatedRow = update(rowToUpdate, {$merge: updated});
-			debugger
-			// go through and change the value of the updated cell, and add back up the numbers
-			// updatedRow.
-      rows[i] = updatedRow;
+			for (let key in updated) {
+				let num = parseInt(updated[key])
+				if (rowToUpdate[key] < num && key === "Rent") {
+					updatedRow.CashFlow += num - rowToUpdate[key]
+				} else if (rowToUpdate[key] > num && key === "Rent") {
+					updatedRow.CashFlow -= rowToUpdate[key] - num	
+				} else if (rowToUpdate[key] < num && key !== "Rent") {
+					updatedRow.CashFlow -= num - rowToUpdate[key] 		
+				} else if (rowToUpdate[key] > num && key !== "Rent") {
+					updatedRow.CashFlow += rowToUpdate[key] - num					
+				}
+			rows[i] = updatedRow;
+			}
 		}
-		
-
-    this.setState({ 
-			rows 
-		});
+    this.setState({ rows });
   }
 
   render() {
