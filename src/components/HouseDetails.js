@@ -6,24 +6,39 @@ import ContentDrafts from 'material-ui/svg-icons/content/drafts';
 import ContentSend from 'material-ui/svg-icons/content/send';
 import Subheader from 'material-ui/Subheader';
 import Toggle from 'material-ui/Toggle';
+import Button from './Button'
+import Auth from '../adapters/auth'
+import SnackBar from './SnackBar'
+
+
 
 export default class ListExampleNested extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      saved: false,
+      user: true
+    };
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-  state = {
-    open: false,
-  };
+  
 
-  handleToggle = () => {
+  handleClick = () => {
     this.setState({
-      open: !this.state.open,
-    });
-  };
-
-  handleNestedListToggle = (item) => {
-    this.setState({
-      open: item.state.open,
-    });
-  };
+      saved: false
+    })
+    if (localStorage.getItem('token')) {
+      Auth.save(this.props)
+			.then((msg) => {
+				this.setState({
+            saved: msg.msg
+				})
+			})
+    } else {
+      // render login or sign up form
+    }
+  }
 
   render() {
     console.log(this.props)
@@ -33,12 +48,14 @@ export default class ListExampleNested extends React.Component {
           <List>
             <Subheader>Property Details (2017)</Subheader>
             <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate.amount}`} leftIcon={<ContentSend />} />
-            <ListItem primaryText="Taxes: " leftIcon={<ContentSend />} />
+            <ListItem primaryText={`Taxes: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].assessment.tax.taxamt}`} leftIcon={<ContentSend />} />
             <ListItem primaryText="HOA Fees: N/A" leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
+          {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}
+          <Button label="Save Listing" handleClick={this.handleClick}/>
         </div>
       );
     } else {
@@ -47,12 +64,14 @@ export default class ListExampleNested extends React.Component {
           <List>
             <Subheader>Property Details (2017)</Subheader>
             <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate.amount}`} leftIcon={<ContentSend />} />
-            <ListItem primaryText="Taxes: " leftIcon={<ContentSend />} />
+            <ListItem primaryText={`Taxes: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].assessment.tax.taxamt}`} leftIcon={<ContentSend />} />
             <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt} sqft`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />          
+            <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
+          {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}          
+          <Button label="Save Listing" handleClick={this.handleClick}/>
         </div>
       );
     }

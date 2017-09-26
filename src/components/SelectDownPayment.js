@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-const items = [<MenuItem value={'cash'} primaryText={'cash'}/>];
-for (let i = 0; i <= 95; i+=5 ) {
-  items.push(<MenuItem value={i} key={i} primaryText={`${i}%`} />);
+const items = [<MenuItem key={0} value={'Cash'} primaryText={'Cash'} />];
+for (let i = 0; i <= 95; i += 1) {
+  items.push(<MenuItem value={i} key={i + 1} primaryText={`${i}%`} />);
 }
 
 /**
@@ -17,7 +17,7 @@ export default class DropDownMenuLongMenuExample extends Component {
   };
 
   handleChange = (event, index, value) => {
-    this.setState({value});
+    this.setState({ value });
     this.props.changeDP(event.target.innerText)
   };
 
