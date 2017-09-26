@@ -23,13 +23,11 @@ class TextFieldExampleSimple extends React.Component {
 	render() {
 		return (
 			<div>
-				<br />
 				<TextField
 					hintText={this.props.label}
 					floatingLabelText={this.props.label}
 					onChange={this.handleChange}
 					errorText={this.state.errorText} />
-				<br />
 			</div>
 		)
 	}

@@ -67,11 +67,11 @@ export default class TabsExampleControlled extends React.Component {
   }
 
   handleClick = () => {
-    let price = this.state.purchasePrice
-    let dp = this.state.downPayment
+    let price = this.state.purchasePrice === "" ? 0 : this.state.purchasePrice
+    let dp = this.state.downPayment === "" ? 0 : this.state.downPayment
     let mortgage = this.state.mortgage
-    let HOI = parseInt(this.state.HOI)
-    let HOA = parseInt(this.state.HOA)
+    let HOI = this.state.HOI === "" ? 0 : parseInt(this.state.HOI)
+    let HOA = this.state.HOA === "" ? 0 : parseInt(this.state.HOA)
     this.props.submitForAnalysis(price, mortgage, dp, HOI, HOA)
   };
 
@@ -83,32 +83,14 @@ export default class TabsExampleControlled extends React.Component {
         <Tab label="Purchase Details" value="a">
           <div>
             <h2 style={styles.headline}>Enter the additional info below for your cashflow analysis</h2>
-
-
             <Grid padded relaxed>
               <Grid.Row>
                 <Grid.Column width={8}>
                   <Text label="Purchase Price" handleChange={this.changePrice} />
-                </Grid.Column>
-                <Grid.Column width={8}>
                   <Text label="HOA Fees/month (if applicable)" handleChange={this.changeHOA} />
-                </Grid.Column>
-              </Grid.Row>
-
-              <Grid.Row>
-                <Grid.Column width={8}>
-                  <SelectDownPayment changeDP={this.changeDP} />
-                </Grid.Column>
-                <Grid.Column width={8}>
                   <Text label="Homeowner's Insurance/month" handleChange={this.changeHOI} />
-                </Grid.Column>
-              </Grid.Row>
-
-              <Grid.Row>
-                <Grid.Column width={8}>
+                  <SelectDownPayment changeDP={this.changeDP} />
                   <SelectMortgage changeMortgage={this.changeMortgage} />
-                </Grid.Column>
-                <Grid.Column width={8}>
                   <Button label="Calculate" handleClick={this.handleClick} />
                 </Grid.Column>
               </Grid.Row>
@@ -116,8 +98,6 @@ export default class TabsExampleControlled extends React.Component {
 
           </div>
         </Tab>
-
-
         <Tab label="Sale History" value="b">
           <div>
             <h2 style={styles.headline}>Controllable Tab B</h2>
