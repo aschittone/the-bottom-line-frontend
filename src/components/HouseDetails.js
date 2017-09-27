@@ -9,7 +9,7 @@ import Toggle from 'material-ui/Toggle';
 import Button from './Button'
 import Auth from '../adapters/auth'
 import SnackBar from './SnackBar'
-
+import LoginModal from './LoginModal'
 
 
 export default class ListExampleNested extends React.Component {
@@ -36,7 +36,9 @@ export default class ListExampleNested extends React.Component {
 				})
 			})
     } else {
-      // render login or sign up form
+      this.setState({
+        saved: 'promptLogin'
+      })
     }
   }
 
@@ -55,6 +57,7 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
           {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}
+          {this.state.saved === 'promptLogin' ? <LoginModal text={this.state.saved} {...this.props}/> : null}
           <Button label="Save Listing" handleClick={this.handleClick}/>
         </div>
       );
@@ -70,7 +73,8 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
-          {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}          
+          {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}  
+          {this.state.saved === 'promptLogin' ? <LoginModal text={this.state.saved} {...this.props}/> : null}                  
           <Button label="Save Listing" handleClick={this.handleClick}/>
         </div>
       );

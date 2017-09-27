@@ -79,7 +79,7 @@ class Main extends React.Component {
 
 		return (
 			<div>
-				{this.state.errorMsg !== '' ? <SnackBar text="Username already taken! Choose Another"/> : null}
+				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg}/> : null}
 				<MuiThemeProvider muiTheme={getMuiTheme()}>
 					<Paper style={paperStyle}>
 						<Formsy.Form

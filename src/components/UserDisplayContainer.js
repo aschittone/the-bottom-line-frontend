@@ -39,7 +39,8 @@ class GridExampleCelled extends React.Component {
 						{this.state.data[0] !== undefined ? <h1>Welcome, {this.state.data[0].name}</h1> : null}
 					</Grid.Column>
 					<Grid.Column width={13}>
-						{typeof this.state.data[1] === "object" && this.state.data.length < 1 ? <div><h1>"You have not saved any listings!"</h1></div> : <UserListings {...this.state} handleClick={this.deleteListing}/>}
+						<h1>Saved Listings</h1>
+						{typeof this.state.data[1] === "object" && this.state.data[1].length < 1 ? <div><h2>You have no saved listings!</h2></div> : <UserListings {...this.state} handleClick={this.deleteListing}/>}
 					</Grid.Column>
 				</Grid.Row>
 				<Grid.Row>
