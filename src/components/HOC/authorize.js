@@ -7,13 +7,12 @@ function authorize(RenderedComponent, props) {
 
 		componentWillMount() {
 			if (!localStorage.getItem('token')) {
-				debugger
 				this.props.history.push("/login")
 			}
 		}
 
 		render() {
-			return (<RenderedComponent {...props} {...this.props} />)
+			return (<RenderedComponent history={this.props.history} />)
 		}
 	}
 }

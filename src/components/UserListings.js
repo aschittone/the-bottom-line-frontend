@@ -13,6 +13,12 @@ class CardExampleGroups extends React.Component {
 		this.props.handleClick(address)
 	}
 
+	goToListing = (address) => {
+		debugger
+		this.props.history.history.push(`/listing/${address}`)
+		window.location.reload()
+	}
+
 	render() {
 		let cards = null
 		if (this.props.data !== '' && this.props.data[0] !== undefined) {
@@ -32,6 +38,7 @@ class CardExampleGroups extends React.Component {
 						</Card.Content>
 						<Card.Content extra>
 							<div className='ui two buttons'>
+								<Button basic color='green' onClick={() => this.goToListing(listing.address)}>Go To Listing</Button>
 								<Button basic color='red' onClick={() => this.handleClick(listing.address)}>Unsave Listing</Button>
 							</div>
 						</Card.Content>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { GridList, GridTile } from 'material-ui/GridList';
+import { Redirect } from 'react-router-dom'
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
@@ -24,17 +25,13 @@ const styles = {
 class GridListExampleSimple extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			data: ''
-		}
 	}
 
-	getListing = (address) => {
-		this.setState({
-			data: undefined
-		})
-		this.props.getListing(address)
+	goToListing = (address) => {
+		this.props.history.history.push(`/listing/${address}`)
+		window.location.reload()
 	}
+
 
 	render() {
 		return (
@@ -51,7 +48,8 @@ class GridListExampleSimple extends React.Component {
 								key={index}
 								title={comp.address.street}
 								subtitle={<span><b>{comp.address.street + ", " + comp.address.city + ", " + comp.address.state}</b></span>}
-								actionIcon={<IconButton onClick={() => this.getListing(comp.address.street + ", " + comp.address.city + ", " + comp.address.state)}><StarBorder color="white" /></IconButton>}>
+								actionIcon={<IconButton onClick={() => this.goToListing(comp.address.street + ", " + comp.address.city + ", " + comp.address.state)}	>
+								<StarBorder color="white" /></IconButton>}>
 								<img src={`https://maps.googleapis.com/maps/api/staticmap?&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7Clabel:%7C${comp.address.latitude},${comp.address.longitude}&key=AIzaSyA7UaZXsb4sfJVh-WkvY5sMMX8acA8Miw4`} />
 							</GridTile>
 						))}

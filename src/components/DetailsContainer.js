@@ -7,6 +7,8 @@ import Analysis from './Analysis'
 import Alert from './Alert'
 import DisplayComps from './DisplayComps'
 import SearchBar from './SearchBar'
+import Loading from './LoadingScreen'
+import AdditionalPropertyModal from './AdditionalPropertyModal'
 
 
 
@@ -16,7 +18,8 @@ class GridExampleCelled extends React.Component {
 		this.state = {
 			mortgage: '',
 			purchasePrice: '',
-			downPayment: ''
+			downPayment: '',
+			data: undefined
 		}
 	}
 
@@ -31,41 +34,51 @@ class GridExampleCelled extends React.Component {
 
 	}
 	
-	// componentWillMount() {
-	// 	debugger
-	// }
+	componentWillMount() {
+		let fullPath = this.props.history.match.url.split("/")
+		let addressPath = fullPath[2]
+		console.log('fetching')
+		fetch(`http://localhost:3000/api/v1/listings/${addressPath}`)
+			.then(res => res.json())
+			.then(res => {
+				this.setState({
+					data: res
+				})
+			})
+	}
 
 	render() {
-		if (this.props.data !== undefined && this.props.data.status === 500) {
+		if (this.state.data !== undefined && this.state.data.status === 500) {
 			return (<div><SearchBar /><Alert history={this.props.history} /></div>)
-		} else if (this.props.data !== undefined) {
+		} else if (this.state.data !== undefined && typeof this.state.data[1] !== "string") {
 			return (
 				<Grid columns='equal' padded relaxed >
 					<Grid.Row>
 						<Grid.Column width={5}>
-							<h1>{this.props.data[0].address.street}, {this.props.data[0].address.city}, {this.props.data[0].address.state} {this.props.data[0].address.zipcode}</h1>
-							<StreetView lng={parseFloat(this.props.data[0].address.longitude)} lat={parseFloat(this.props.data[0].address.latitude)} />
+							<h1>{this.state.data[0].address.street}, {this.state.data[0].address.city}, {this.state.data[0].address.state} {this.state.data[0].address.zipcode}</h1>
+							<StreetView lng={parseFloat(this.state.data[0].address.longitude)} lat={parseFloat(this.state.data[0].address.latitude)} />
 						</Grid.Column>
 						<Grid.Column width={4}>
-							<HouseDetails {...this.props.data} />
+							<HouseDetails {...this.state.data} {...this.props}/>
 						</Grid.Column>
 						<Grid.Column >
-							<DisplayComps {...this.props.data} getListing={this.props.getListingFromComps}/>
+							<DisplayComps {...this.state.data} {...this.props}/>
 						</Grid.Column>
 					</Grid.Row>
-
 					<Grid.Row>
 						<Grid.Column >
-							<Description {...this.props.data} submitForAnalysis={this.submitForAnalysis} />
+							<Description {...this.state.data} submitForAnalysis={this.submitForAnalysis} />
 						</Grid.Column>
 						<Grid.Column width={11}>
-							<Analysis purchaseInfo={this.state} data={this.props.data} />
+							<Analysis purchaseInfo={this.state} data={this.state.data} />
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
 			)
+		} else if (this.state.data !== undefined && typeof this.state.data[1] === "string") {
+			return (<AdditionalPropertyModal data={this.state} history={this.props}/>)
 		} else {
-			return (<SearchBar {...this.props.data} />)
+			return (<Loading />)
 		}
 	}
 }

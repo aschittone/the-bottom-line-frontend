@@ -19,7 +19,7 @@ export default class DialogExampleAlert extends React.Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 
-	handleClick = () => {
+	handleClick = (lastHistory) => {
 		this.props.history.history.push('/search')
 	}
 
@@ -28,7 +28,7 @@ export default class DialogExampleAlert extends React.Component {
 			<FlatButton
 				label="Search Again"
 				primary={true}
-				onClick={this.handleClick}
+				onClick={() => this.handleClick(this.props.history.history)}
 			/>
 		];
 

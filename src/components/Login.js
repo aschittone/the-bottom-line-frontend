@@ -10,12 +10,17 @@ import {
 	FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
 	FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete
 } from 'formsy-material-ui/lib';
+import Auth from '../adapters/auth'
+import SnackBar from './SnackBar'
+
+
 
 class Main extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			canSumit: false
+			canSumit: false,
+			errorMsg: ''
 		}
 		this.enableButton = this.enableButton.bind(this)
 		this.disableButton = this.disableButton.bind(this)
@@ -56,15 +61,24 @@ class Main extends React.Component {
 	}
 
 	submitForm(data, event) {
+		this.setState({
+			errorMsg: ''
+		})
 		const userParams = {
 			username: data.email,
 			password: data.password
 		}
-		// Auth.login(userParams)
-		// 	.then((user) => {
-		// 		localStorage.setItem("token", user.jwt)
-		// 		this.props.history.replace("/home")
-		// 	})
+		Auth.login(userParams)
+			.then((res) => {
+					if (res.msg === "Success") {
+						localStorage.setItem("token", res.jwt)
+						this.props.history.push("/user/listings")
+					} else {
+					this.setState({
+						errorMsg: res.msg
+					})
+				}
+			})
 	}
 
 	notifyFormError(data) {
@@ -76,39 +90,42 @@ class Main extends React.Component {
 		let { wordsError, numericError, urlError } = this.errorMessages;
 
 		return (
-			<MuiThemeProvider muiTheme={getMuiTheme()}>
-				<Paper style={paperStyle}>
-					<Formsy.Form
-						onValid={this.enableButton}
-						onInvalid={this.disableButton}
-						onValidSubmit={this.submitForm}
-						onInvalidSubmit={this.notifyFormError}
-					>
-						<FormsyText
-							name="email"
-							validations="isEmail"
-							validationError={"Please enter a valid email"}
-							required
-							hintText="Username"
-							floatingLabelText="Username"
-						/>
-						<FormsyText
-							name="password"
-							type="password"
-							required
-							hintText="Password"
-							floatingLabelText="Password"
-							updateImmediately
-						/>
-						<RaisedButton
-							style={submitStyle}
-							type="submit"
-							label="Submit"
-							disabled={!this.state.canSubmit}
-						/>
-					</Formsy.Form>
-				</Paper>
-			</MuiThemeProvider>
+			<div>
+				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg}/> : null}
+				<MuiThemeProvider muiTheme={getMuiTheme()}>
+					<Paper style={paperStyle}>
+						<Formsy.Form
+							onValid={this.enableButton}
+							onInvalid={this.disableButton}
+							onValidSubmit={this.submitForm}
+							onInvalidSubmit={this.notifyFormError}
+						>
+							<FormsyText
+								name="email"
+								validations="isEmail"
+								validationError={"Please enter a valid email"}
+								required
+								hintText="Username"
+								floatingLabelText="Username"
+							/>
+							<FormsyText
+								name="password"
+								type="password"
+								required
+								hintText="Password"
+								floatingLabelText="Password"
+								updateImmediately
+							/>
+							<RaisedButton
+								style={submitStyle}
+								type="submit"
+								label="Submit"
+								disabled={!this.state.canSubmit}
+							/>
+						</Formsy.Form>
+					</Paper>
+				</MuiThemeProvider>
+			</div>
 		);
 	}
 }
