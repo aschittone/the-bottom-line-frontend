@@ -95,7 +95,7 @@ class Auth {
 
 
 	static logOut() {
-		localStorage.removeItem('token')
+		localStorage.clear()
 	}
 }
 

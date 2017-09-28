@@ -39,10 +39,19 @@
 	}
 	
 
-export function affordability(props, state) {
-		debugger
-
-
-
-		return []
-	}
+export function affordability(props, state, getMortgage, getMI) {
+	let mortgage = getMortgage(props.mortgage, props.downPayment, props.purchasePrice)
+	let mi = getMI(props.downPayment, props.purchasePrice)
+	let HOA = parseInt(state.HOA)
+	let HOI = parseInt(state.HOI)
+	
+	let taxes = props.data[3] === "tax data not available" ? 0 : (JSON.parse(props.data[3].body).property[0].assessment.tax.taxamt / 12)
+	let downpayment = (parseInt(props.downPayment) / 100 ) * parseInt(props.purchasePrice)
+	let income = (parseInt(state.financialData[0].average_annual_income) / 12)
+	let housingPayment = mortgage + mi + HOI + taxes
+	let debts = parseInt(state.financialData[0].total_debt)
+	let credit = parseInt(state.financialData[0].credit_score)
+	let assets = parseInt(state.financialData[0].assets)
+	// debugger
+	return [{income: income, housingPayment: housingPayment, debts: debts, mortgage: mortgage, mi: mi, hoa: HOA, hoi: HOI, taxes: taxes, downpayment: downpayment, credit: credit, assets: assets}]
+}

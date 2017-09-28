@@ -33,7 +33,7 @@ class translate extends React.Component {
 		
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		Auth.getFinancialData()
 		.then(res => {
 			this.setState({
