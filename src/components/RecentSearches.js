@@ -12,25 +12,42 @@ const styles = {
     icon: { float: 'right', width: 64, height: 64, padding: 16, color: '#f44336' },
 };
 
-const translate = () => (
+
+
+class translate extends React.Component {
+
+
+    render() {
+        let recentSearches;
+        if (localStorage.getItem('token') && !localStorage.getItem('search')) {
+            recentSearches = <h3>You have no recent searches!</h3>
+        } else if (localStorage.getItem('token') && localStorage.getItem('search')) {
+            let searches = JSON.parse(localStorage.getItem('search'))  
+            recentSearches = searches.map((search, i) => {
+                if (i < 7) {
+                  return (<ListItem
+                        key={i}
+                        href={`http://localhost:3001/listing/${search}`}
+                        primaryText={search}
+                    />)
+                }
+            })
+            
+        }
+
+        return (
     <Card style={styles.card}>
         <CommentIcon style={styles.icon} />
         <CardTitle title="Recent Searches" style={styles.titleLink} subtitle="Here's a list of your recent searches. Click on any of them below to analyze the property again." />
-        
+        <List>
+        {recentSearches}
+        </List>
     </Card>
-	);
+        )
+    }
+}
 	
-	// <List>
-  //           {reviews.map(record =>
-  //               <ListItem
-  //                   key={record.id}
-  //                   href={`#/reviews/${record.id}`}
-  //                   primaryText={<StarRatingField record={record} />}
-  //                   secondaryText={record.comment}
-  //                   secondaryTextLines={2}
-  //                   leftAvatar={customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar />}
-  //               />
-  //           )}
-	//       </List>
 	
-	export default translate
+export default translate
+    
+    // leftAvatar={customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar />}
