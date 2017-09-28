@@ -67,6 +67,32 @@ class Auth {
 			.then(res => res.json())
 		}
 
+			static saveFinancialInfo(userListingParams) {
+				const userJSON = JSON.stringify(userListingParams)
+				const jwtToken = localStorage.getItem("token")
+					return fetch('http://localhost:3000/api/v1/user/financials', {
+					method: 'post',
+					body: userJSON,
+					headers: {
+						"Authorization": `Bearer ${jwtToken}`,
+						"Content-Type": "application/json",
+						"Accept": "application/json"
+					}
+				})
+				.then(res => res.json())
+			}
+			
+		static getFinancialData() {
+			const jwtToken = localStorage.getItem("token")
+			return fetch('http://localhost:3000/api/v1/user/financials', {
+				headers: {
+					"Authorization": `Bearer ${jwtToken}`,
+					"Accept": "application/json"
+				}
+			})
+				.then(res => res.json())
+		}
+
 
 	static logOut() {
 		localStorage.removeItem('token')

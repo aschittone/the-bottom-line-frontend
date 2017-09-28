@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button, Card, Image } from 'semantic-ui-react'
-
+import { CardTitle } from 'material-ui/Card';
+import { List, ListItem } from 'material-ui/List';
 
 
 class CardExampleGroups extends React.Component {
 	constructor(props) {
 		super(props)
-		
+
 	}
 
 	handleClick = (address) => {
@@ -14,8 +15,7 @@ class CardExampleGroups extends React.Component {
 	}
 
 	goToListing = (address) => {
-		debugger
-		this.props.history.history.push(`/listing/${address}`)
+		this.props.history.push(`/listing/${address}`)
 		window.location.reload()
 	}
 
@@ -24,7 +24,7 @@ class CardExampleGroups extends React.Component {
 		if (this.props.data !== '' && this.props.data[0] !== undefined) {
 			cards = this.props.data[1].map(listing => {
 				return (
-						<Card>
+					<Card>
 						<Card.Content>
 							<Card.Header>
 								{listing.address}
@@ -47,10 +47,10 @@ class CardExampleGroups extends React.Component {
 			})
 		}
 		return (
-			<div>
-				<Card.Group>
-					{cards}
-				</Card.Group>
+			<div>			
+			<Card.Group>	
+				{cards}	
+			</Card.Group>	
 			</div>
 		)
 	}

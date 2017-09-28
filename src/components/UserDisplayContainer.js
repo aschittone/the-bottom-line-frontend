@@ -2,6 +2,22 @@ import React from 'react'
 import { Grid, Image } from 'semantic-ui-react'
 import UserListings from './UserListings'
 import Auth from '../adapters/auth'
+import Welcome from './Welcome';
+import RecentSearches from './RecentSearches'
+import FinancialProfile from './FinancialProfile'
+import SnackBar from './SnackBar'
+
+
+
+const layoutStyles = {
+    welcome: { marginBottom: '2em', marginLeft: '1em', marginRight: '1em', marginTop: '2em' },
+    flex: { display: 'flex' },
+    leftCol: { flex: 1, marginRight: '1em', marginLeft: '1em'  },
+    leftCol: { flex: 1, marginRight: '1em', marginTop: '1em', marginLeft: '1em' },
+    rightCol: { flex: 1, marginLeft: '1em' },
+    singleCol: { marginTop: '2em' },
+};
+
 
 
 class GridExampleCelled extends React.Component {
@@ -9,55 +25,68 @@ class GridExampleCelled extends React.Component {
 		super(props)
 
 		this.state = {
-			data: [undefined, 0]
+			data: [undefined, 0],
+			financialData: '',
+		}
+
+		Auth.me()
+			.then((user) => {
+				this.setState({
+					data: user
+				})
+			})
+
+			this.saveData = this.saveData.bind(this)
 		}
 		
-		Auth.me()
-		.then((user) => {
+		saveData = (userParams) => {
 			this.setState({
-				data: user
+				financialData:''		
 			})
-		})
-
-	}
+        Auth.saveFinancialInfo(userParams)
+          .then((res) => {
+          	console.log(res)
+        	})
+			
+			this.setState({
+				financialData: userParams			
+			})
+    }
 
 	deleteListing = (address) => {
 		Auth.delete(address)
-		.then((res) => {
-			this.setState({
-				data: res
+			.then((res) => {
+				this.setState({
+					data: res
+				})
 			})
-		})
 	}
-
 
 	render() {
 		return (
-			<Grid celled>
-				<Grid.Row>
-					<Grid.Column width={3}>
-						{this.state.data[0] !== undefined ? <h1>Welcome, {this.state.data[0].name}</h1> : null}
-					</Grid.Column>
-					<Grid.Column width={13}>
-						<h1>Saved Listings</h1>
-						{typeof this.state.data[1] === "object" && this.state.data[1].length < 1 ? <div><h2>You have no saved listings!</h2></div> : <UserListings {...this.state} handleClick={this.deleteListing}/>}
-					</Grid.Column>
-				</Grid.Row>
-				<Grid.Row>
-					<Grid.Column width={3}>
-						<Image src='/assets/images/wireframe/image.png' />
-					</Grid.Column>
-					<Grid.Column width={10}>
-						<Image src='/assets/images/wireframe/paragraph.png' />
-					</Grid.Column>
-					<Grid.Column width={3}>
-						<Image src='/assets/images/wireframe/image.png' />
-					</Grid.Column>
-				</Grid.Row>
-			</Grid>
+			<div className="box">
+						{this.state.data[0] !== undefined ? <Welcome data={this.state} style={layoutStyles.welcome} /> : null}
+						<div style={layoutStyles.flex}>
+								<div style={layoutStyles.leftCol}>
+								<div><h2>Saved Properties:</h2></div>					
+									{typeof this.state.data[1] === "object" && this.state.data[1].length < 1 ? <div><h2>You have no saved listings!</h2></div> : <UserListings {...this.state} history={this.props.history} handleClick={this.deleteListing} />}			
+								</div>
+								<div style={layoutStyles.rightCol}>
+										<div style={layoutStyles.flex}>
+												<RecentSearches />
+												<FinancialProfile saveData={this.saveData}/>
+												
+										</div>
+								</div>
+						</div>
+			          {typeof this.state.financialData === "object" ? <SnackBar text="Financial Profile Saved!"/> : null}
+				</div>
+			
 		)
 	}
 }
 
 
 export default GridExampleCelled
+
+
