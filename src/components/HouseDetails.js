@@ -20,13 +20,13 @@ export default class ListExampleNested extends React.Component {
       user: true
     };
     this.handleClick = this.handleClick.bind(this)
+    
   }
-
-  
 
   handleClick = () => {
     this.setState({
-      saved: false
+      saved: false,
+      user: false
     })
     if (localStorage.getItem('token')) {
       Auth.save(this.props)
@@ -37,7 +37,8 @@ export default class ListExampleNested extends React.Component {
 			})
     } else {
       this.setState({
-        saved: 'promptLogin'
+        saved: 'promptLogin',
+        user: false
       })
     }
   }
@@ -56,7 +57,7 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
-          {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}
+          {this.state.saved !== false && this.state.saved !== 'promptLogin' ? <SnackBar text={this.state.saved}/> : null}
           {this.state.saved === 'promptLogin' ? <LoginModal text={this.state.saved} {...this.props}/> : null}
           <Button label="Save Listing" handleClick={this.handleClick}/>
         </div>
@@ -73,7 +74,7 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
-          {this.state.saved !== false ? <SnackBar text={this.state.saved}/> : null}  
+          {this.state.saved !== false && this.state.saved !== 'promptLogin' ? <SnackBar text={this.state.saved}/> : null}  
           {this.state.saved === 'promptLogin' ? <LoginModal text={this.state.saved} {...this.props}/> : null}                  
           <Button label="Save Listing" handleClick={this.handleClick}/>
         </div>

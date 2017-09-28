@@ -6,14 +6,53 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import MenuItem from 'material-ui/MenuItem';
-import {
-	FormsyCheckbox, FormsyDate, FormsyRadio, FormsyRadioGroup,
-	FormsySelect, FormsyText, FormsyTime, FormsyToggle, FormsyAutoComplete
-} from 'formsy-material-ui/lib';
+import { FormsyText } from 'formsy-material-ui/lib';
 import Auth from '../adapters/auth'
 import SnackBar from './SnackBar'
+import { Card, CardActions } from 'material-ui/Card';
+import Avatar from 'material-ui/Avatar';
+import LockIcon from 'material-ui/svg-icons/action/lock-outline';
+import { cyan500, pinkA200 } from 'material-ui/styles/colors';
 
 
+const styles = {
+	main: {
+		display: 'flex',
+		flexDirection: 'column',
+		minHeight: '100vh',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	card: {
+		minWidth: 300,
+	},
+	avatar: {
+		margin: '1em',
+		textAlign: 'center ',
+	},
+	form: {
+		padding: '0 1em 1em 1em',
+	},
+	input: {
+		display: 'flex',
+	},
+	hint: {
+		textAlign: 'center',
+		marginTop: '1em',
+		color: '#ccc',
+	},
+};
+
+function getColorsFromTheme(theme) {
+	if (!theme) return { primary1Color: cyan500, accent1Color: pinkA200 };
+	const {
+        palette: {
+            primary1Color,
+		accent1Color,
+        },
+      } = theme;
+	return { primary1Color, accent1Color };
+}
 
 class Main extends React.Component {
 	constructor(props) {
@@ -32,20 +71,6 @@ class Main extends React.Component {
 		wordsError: "Please only use letters",
 		numericError: "Please provide a number",
 		urlError: "Please provide a valid URL"
-	}
-
-	styles = {
-		paperStyle: {
-			width: 300,
-			margin: 'auto',
-			padding: 20,
-		},
-		switchStyle: {
-			marginBottom: 16,
-		},
-		submitStyle: {
-			marginTop: 32,
-		}
 	}
 
 	enableButton() {
@@ -70,10 +95,10 @@ class Main extends React.Component {
 		}
 		Auth.login(userParams)
 			.then((res) => {
-					if (res.msg === "Success") {
-						localStorage.setItem("token", res.jwt)
-						this.props.history.push("/user/listings")
-					} else {
+				if (res.msg === "Success") {
+					localStorage.setItem("token", res.jwt)
+					this.props.history.push("/user/listings")
+				} else {
 					this.setState({
 						errorMsg: res.msg
 					})
@@ -86,49 +111,96 @@ class Main extends React.Component {
 	}
 
 	render() {
-		let { paperStyle, switchStyle, submitStyle } = this.styles;
-		let { wordsError, numericError, urlError } = this.errorMessages;
+		const muiTheme = getMuiTheme();
+		const { primary1Color, accent1Color } = getColorsFromTheme(muiTheme);
 
 		return (
 			<div>
-				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg}/> : null}
+				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg} /> : null}
 				<MuiThemeProvider muiTheme={getMuiTheme()}>
-					<Paper style={paperStyle}>
-						<Formsy.Form
-							onValid={this.enableButton}
-							onInvalid={this.disableButton}
-							onValidSubmit={this.submitForm}
-							onInvalidSubmit={this.notifyFormError}
-						>
-							<FormsyText
-								name="email"
-								validations="isEmail"
-								validationError={"Please enter a valid email"}
-								required
-								hintText="Username"
-								floatingLabelText="Username"
-							/>
-							<FormsyText
-								name="password"
-								type="password"
-								required
-								hintText="Password"
-								floatingLabelText="Password"
-								updateImmediately
-							/>
-							<RaisedButton
-								style={submitStyle}
-								type="submit"
-								label="Submit"
-								disabled={!this.state.canSubmit}
-							/>
-						</Formsy.Form>
-					</Paper>
+					<div style={{ ...styles.main }} className="div-with-bg">
+						<Card style={styles.card}>
+							<div style={styles.avatar}>
+								<Avatar backgroundColor={accent1Color} icon={<LockIcon />} size={60} />
+							</div>
+							<Formsy.Form
+								onValid={this.enableButton}
+								onInvalid={this.disableButton}
+								onValidSubmit={this.submitForm}
+								onInvalidSubmit={this.notifyFormError}>
+								<div style={styles.form}>
+									<p style={styles.hint}>Hint: demo / demo</p>
+									<div style={styles.input} >
+										<FormsyText
+											name="email"
+											validations="isEmail"
+											validationError={"Please enter a valid email"}
+											required
+											hintText="Username"
+											floatingLabelText="Username"
+										/>
+									</div>
+									<div style={styles.input} >
+										<FormsyText
+											name="password"
+											type="password"
+											required
+											hintText="Password"
+											floatingLabelText="Password"
+											updateImmediately
+										/>
+									</div>
+								</div>
+								<CardActions>
+									<RaisedButton
+										type="submit"
+										label="Login"
+										disabled={!this.state.canSubmit}
+										fullWidth
+									/>
+								</CardActions>
+							</Formsy.Form>
+						</Card>
+					</div>
 				</MuiThemeProvider>
-			</div>
+			</div >
 		);
 	}
 }
+
+// <MuiThemeProvider muiTheme={muiTheme}>
+// 	<div style={{ ...styles.main, backgroundColor: primary1Color }}>
+// 		<Card style={styles.card}>
+// 			<div style={styles.avatar}>
+// 				<Avatar backgroundColor={accent1Color} icon={<LockIcon />} size={60} />
+// 			</div>
+// 			<form onSubmit={handleSubmit(this.login)}>
+// 				<div style={styles.form}>
+// 					<p style={styles.hint}>Hint: demo / demo</p>
+// 					<div style={styles.input} >
+// 						<Field
+// 							name="username"
+// 							component={renderInput}
+// 							floatingLabelText={translate('aor.auth.username')}
+// 						/>
+// 					</div>
+// 					<div style={styles.input}>
+// 						<Field
+// 							name="password"
+// 							component={renderInput}
+// 							floatingLabelText={translate('aor.auth.password')}
+// 							type="password"
+// 						/>
+// 					</div>
+// 				</div>
+// 				<CardActions>
+// 					<RaisedButton type="submit" primary disabled={submitting} label={translate('aor.auth.sign_in')} fullWidth />
+// 				</CardActions>
+// 			</form>
+// 		</Card>
+// 		<Notification />
+// 	</div>
+// </MuiThemeProvider>
 
 
 

@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
+import FontIcon from 'material-ui/FontIcon';
 
 const styles = {
 	root: {
@@ -28,6 +29,19 @@ class GridListExampleSimple extends React.Component {
 	}
 
 	goToListing = (address) => {
+		if (localStorage.getItem('token') && !localStorage.getItem('search')) {
+			debugger
+    // Parse the serialized data back into an aray of objects
+    let a = JSON.stringify([address]);
+    // Push the new data (whether it be an object or anything else) onto the array
+    // Alert the array value
+    localStorage.setItem('search', a);
+		} else if (localStorage.getItem('token') && localStorage.getItem('search')) {
+			debugger
+			let searches = JSON.parse(localStorage.getItem('search'))
+			searches.push(address)
+			localStorage.setItem('search', JSON.stringify(searches));
+		}
 		this.props.history.history.push(`/listing/${address}`)
 		window.location.reload()
 	}
@@ -48,9 +62,9 @@ class GridListExampleSimple extends React.Component {
 								key={index}
 								title={comp.address.street}
 								subtitle={<span><b>{comp.address.street + ", " + comp.address.city + ", " + comp.address.state}</b></span>}
-								actionIcon={<IconButton onClick={() => this.goToListing(comp.address.street + ", " + comp.address.city + ", " + comp.address.state)}	>
-								<StarBorder color="white" /></IconButton>}>
-								<img src={`https://maps.googleapis.com/maps/api/staticmap?&zoom=15&size=600x300&maptype=roadmap&markers=color:red%7Clabel:%7C${comp.address.latitude},${comp.address.longitude}&key=AIzaSyA7UaZXsb4sfJVh-WkvY5sMMX8acA8Miw4`} />
+								actionIcon={<IconButton onClick={() => this.goToListing(comp.address.street + ", " + comp.address.city + ", " + comp.address.state)}> 
+								<i className="material-icons">forward</i></IconButton>}>
+								<img src={`https://maps.googleapis.com/maps/api/streetview?size=600x300&location=${comp.address.latitude},${comp.address.longitude}&heading=151.78&pitch=-0.76&key=AIzaSyDR9LJjTcuvQJGBuWHWUhzQPCVR5hPnGto`} />
 							</GridTile>
 						))}
 					</GridList>

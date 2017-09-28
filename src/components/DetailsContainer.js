@@ -9,8 +9,24 @@ import DisplayComps from './DisplayComps'
 import SearchBar from './SearchBar'
 import Loading from './LoadingScreen'
 import AdditionalPropertyModal from './AdditionalPropertyModal'
+import { Card, CardActions } from 'material-ui/Card';
 
 
+const styles = {
+	main: {
+		display: 'flex',
+		flexDirection: 'column',
+		minHeight: '100vh',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	card: {
+		minWidth: 300,
+	},
+	loading: {
+		padding: '0 1em 1em 1em',
+	}
+}
 
 class GridExampleCelled extends React.Component {
 	constructor(props) {
@@ -52,6 +68,7 @@ class GridExampleCelled extends React.Component {
 			return (<div><SearchBar /><Alert history={this.props.history} /></div>)
 		} else if (this.state.data !== undefined && typeof this.state.data[1] !== "string") {
 			return (
+				<div style={{ paddingTop: 64 }}>
 				<Grid columns='equal' padded relaxed >
 					<Grid.Row>
 						<Grid.Column width={5}>
@@ -67,20 +84,31 @@ class GridExampleCelled extends React.Component {
 					</Grid.Row>
 					<Grid.Row>
 						<Grid.Column >
-							<Description {...this.state.data} submitForAnalysis={this.submitForAnalysis} />
+							<Description {...this.state} submitForAnalysis={this.submitForAnalysis} />
 						</Grid.Column>
 						<Grid.Column width={11}>
 							<Analysis purchaseInfo={this.state} data={this.state.data} />
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
+				</div>
 			)
 		} else if (this.state.data !== undefined && typeof this.state.data[1] === "string") {
-			return (<AdditionalPropertyModal data={this.state} history={this.props}/>)
+			return (<div><SearchBar /> <AdditionalPropertyModal data={this.state} history={this.props}/></div>)
 		} else {
-			return (<Loading />)
+			return (
+				<div style={{ ...styles.main }} className='page-wrapper div-with-bg'>
+					<Card style={styles.card}>
+					<div style={styles.loading}>
+						<Loading />
+						</div>
+					</Card>
+				</div>
+			)
 		}
 	}
 }
 
 export default GridExampleCelled
+
+

@@ -25,7 +25,7 @@ class gridInstance extends React.Component {
 				<Route path="/listing/:address" render={(props) => (<DetailsContainer getListingFromComps={this.getListingFromComps} {...this.state} history={props} />)} />
 				<Route path="/signup" render={(props) => (<SignUp {...props} />)} />
 				<Route path="/login" render={(props) => (<Login {...props} />)} />
-				<Route path="/user/listings" render={(props) => (authorize(UserDisplayContainer))} />
+				<Route path="/user/listings" component={authorize(UserDisplayContainer)} />
 			</div>
 		)
 	}

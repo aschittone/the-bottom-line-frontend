@@ -47,6 +47,7 @@ export default class DrawerUndockedExample extends React.Component {
 					title="Title"
 					iconClassNameRight="muidocs-icon-navigation-expand-more"
 					onLeftIconButtonTouchTap={this.handleToggle}
+					style={{ backgroundColor: '#191a1c', position: "fixed" }}
 				/>
 				<Drawer
 					docked={false}
