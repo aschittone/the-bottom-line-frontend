@@ -10,12 +10,12 @@ import SnackBar from './SnackBar'
 
 
 const layoutStyles = {
-    welcome: { marginBottom: '2em', marginLeft: '1em', marginRight: '1em', marginTop: '2em' },
-    flex: { display: 'flex' },
-    leftCol: { flex: 1, marginRight: '1em', marginLeft: '1em'  },
-    leftCol: { flex: 1, marginRight: '1em', marginTop: '1em', marginLeft: '1em' },
-    rightCol: { flex: 1, marginLeft: '1em' },
-    singleCol: { marginTop: '2em' },
+	welcome: { marginBottom: '2em', marginLeft: '1em', marginRight: '1em', marginTop: '2em' },
+	flex: { display: 'flex' },
+	leftCol: { flex: 1, marginRight: '1em', marginLeft: '1em' },
+	leftCol: { flex: 1, marginRight: '1em', marginTop: '1em', marginLeft: '1em' },
+	rightCol: { flex: 1, marginLeft: '1em' },
+	singleCol: { marginTop: '2em' },
 };
 
 
@@ -26,32 +26,32 @@ class GridExampleCelled extends React.Component {
 
 		this.state = {
 			data: [undefined, 0],
-			financialData: '',
+			saved: false
 		}
 
 		Auth.me()
-			.then((user) => {
+			.then((res) => {
 				this.setState({
-					data: user
+					data: res
 				})
 			})
 
-			this.saveData = this.saveData.bind(this)
-		}
-		
-		saveData = (userParams) => {
-			this.setState({
-				financialData:''		
+		this.saveData = this.saveData.bind(this)
+	}
+
+	saveData = (userParams) => {
+		Auth.saveFinancialInfo(userParams)
+			.then((res) => {
+				console.log(res)
+				this.setState({
+					data: res,
+					saved: true
+				})
 			})
-        Auth.saveFinancialInfo(userParams)
-          .then((res) => {
-          	console.log(res)
-        	})
-			
-			this.setState({
-				financialData: userParams			
-			})
-    }
+		this.setState({
+			saved: false
+		})
+	}
 
 	deleteListing = (address) => {
 		Auth.delete(address)
@@ -65,23 +65,22 @@ class GridExampleCelled extends React.Component {
 	render() {
 		return (
 			<div className="box">
-						{this.state.data[0] !== undefined ? <Welcome data={this.state} style={layoutStyles.welcome} /> : null}
+				{this.state.data[0] !== undefined ? <Welcome data={this.state} style={layoutStyles.welcome} /> : null}
+				<div style={layoutStyles.flex}>
+					<div style={layoutStyles.leftCol}>
+						{typeof this.state.data[1] === "object" && this.state.data[1].length < 1 ? <div><h2>You have no saved listings!</h2></div> : <UserListings {...this.state} history={this.props.history} handleClick={this.deleteListing} />}
+					</div>
+					<div style={layoutStyles.rightCol}>
 						<div style={layoutStyles.flex}>
-								<div style={layoutStyles.leftCol}>
-								<div><h2>Saved Properties:</h2></div>					
-									{typeof this.state.data[1] === "object" && this.state.data[1].length < 1 ? <div><h2>You have no saved listings!</h2></div> : <UserListings {...this.state} history={this.props.history} handleClick={this.deleteListing} />}			
-								</div>
-								<div style={layoutStyles.rightCol}>
-										<div style={layoutStyles.flex}>
-												<RecentSearches />
-												<FinancialProfile saveData={this.saveData}/>
-												
-										</div>
-								</div>
+							<RecentSearches />
+							<FinancialProfile saveData={this.saveData} />
+
 						</div>
-			          {typeof this.state.financialData === "object" ? <SnackBar text="Financial Profile Saved!"/> : null}
+					</div>
 				</div>
-			
+				{this.state.saved === true ? <SnackBar text="Financial Profile Saved!" /> : null}
+			</div>
+
 		)
 	}
 }

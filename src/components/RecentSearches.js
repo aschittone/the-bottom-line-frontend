@@ -22,32 +22,32 @@ class translate extends React.Component {
         if (localStorage.getItem('token') && !localStorage.getItem('search')) {
             recentSearches = <h3>You have no recent searches!</h3>
         } else if (localStorage.getItem('token') && localStorage.getItem('search')) {
-            let searches = JSON.parse(localStorage.getItem('search'))  
-            recentSearches = searches.map((search, i) => {
-                if (i < 7) {
-                  return (<ListItem
+            let searches = JSON.parse(localStorage.getItem('search'))
+            recentSearches = []
+            for (var i = searches.length - 1; i >= 0; i--) {
+                if (i > ((searches.length - 1) - 7)) {
+                    recentSearches.push((<ListItem
                         key={i}
-                        href={`http://localhost:3001/listing/${search}`}
-                        primaryText={search}
-                    />)
+                        href={`http://localhost:3001/listing/${searches[i]}`}
+                        primaryText={searches[i]}
+                    />))
                 }
-            })
-            
+            }
         }
 
         return (
-    <Card style={styles.card}>
-        <CommentIcon style={styles.icon} />
-        <CardTitle title="Recent Searches" style={styles.titleLink} subtitle="Here's a list of your recent searches. Click on any of them below to analyze the property again." />
-        <List>
-        {recentSearches}
-        </List>
-    </Card>
+            <Card style={styles.card}>
+                <CommentIcon style={styles.icon} />
+                <CardTitle title="Recent Searches" style={styles.titleLink} subtitle="Here's a list of your recent searches. Click on any of them below to analyze the property again." />
+                <List>
+                    {recentSearches}
+                </List>
+            </Card>
         )
     }
 }
-	
-	
+
+
 export default translate
-    
+
     // leftAvatar={customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar />}
