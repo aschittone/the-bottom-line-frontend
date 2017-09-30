@@ -16,32 +16,38 @@ export default class ListExampleNested extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      saved: false,
-      user: true
+      saved: '',
     };
     this.handleClick = this.handleClick.bind(this)
-    
+
   }
 
   handleClick = () => {
     this.setState({
-      saved: false,
-      user: false
+      saved: ''
     })
     if (localStorage.getItem('token')) {
       Auth.save(this.props)
-			.then((msg) => {
-				this.setState({
+        .then((msg) => {
+          this.setState({
             saved: msg.msg
-				})
-			})
+          })
+        })
     } else {
       this.setState({
-        saved: 'promptLogin',
-        user: false
+        saved: false,
       })
     }
   }
+
+  componentDidUpdate() {
+    if (this.state.saved === false) {
+      this.setState({
+        saved: ''
+      })
+    }
+  }
+
 
   render() {
     console.log(this.props)
@@ -57,9 +63,9 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
-          {this.state.saved !== false && this.state.saved !== 'promptLogin' ? <SnackBar text={this.state.saved}/> : null}
-          {this.state.saved === 'promptLogin' ? <LoginModal text={this.state.saved} {...this.props}/> : null}
-          <Button label="Save Listing" handleClick={this.handleClick}/>
+          {this.state.saved !== false && this.state.saved !== '' ? <SnackBar text={this.state.saved} /> : null}
+          {this.state.saved === false ? <LoginModal text={this.state.saved} {...this.props} /> : null}
+          <Button label="Save Listing" handleClick={this.handleClick} />
         </div>
       );
     } else {
@@ -74,9 +80,9 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
             <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
           </List>
-          {this.state.saved !== false && this.state.saved !== 'promptLogin' ? <SnackBar text={this.state.saved}/> : null}  
-          {this.state.saved === 'promptLogin' ? <LoginModal text={this.state.saved} {...this.props}/> : null}                  
-          <Button label="Save Listing" handleClick={this.handleClick}/>
+          {this.state.saved !== false && this.state.saved !== '' ? <SnackBar text={this.state.saved} /> : null}
+          {this.state.saved === false ? <LoginModal text={this.state.saved} {...this.props} /> : null}
+          <Button label="Save Listing" handleClick={this.handleClick} />
         </div>
       );
     }
