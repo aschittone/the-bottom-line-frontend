@@ -43,7 +43,7 @@ export default class ListExampleNested extends React.Component {
 
   render() {
     console.log(this.props)
-    debugger
+
     if (this.props[0].useCode.toLowerCase() === "condominium") {
       return (
         <div>

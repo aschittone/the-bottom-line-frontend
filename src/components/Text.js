@@ -10,6 +10,9 @@ class TextFieldExampleSimple extends React.Component {
 	}
 
 	handleChange = (event) => {
+		if (event.target.value === "") {
+			this.props.handleChange(0)
+		}
 		for (var i = 0; i < event.target.value.length; i++) {
 			if (!isNaN(parseInt(event.target.value[i]))) {
 				this.setState({ errorText: '' })
