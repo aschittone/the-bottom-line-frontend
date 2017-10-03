@@ -25,7 +25,7 @@ export default class ListExampleNested extends React.Component {
 	}
 
 	render() {
-		debugger
+
 		return (
 			<div>
 				<List>

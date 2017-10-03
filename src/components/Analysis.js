@@ -33,7 +33,6 @@ export default class TabsExampleSwipeable extends React.Component {
     console.log(nextProps)
     if (nextProps.purchaseInfo !== this.props.purchaseInfo) {
       let taxes = nextProps.data[3] === "tax data not available" ? 0 : Math.round((parseInt(JSON.parse(nextProps.data[3].body).property[0].assessment.tax.taxamt) / 12))
-
       let HOI = nextProps.purchaseInfo.HOI
       let HOA = nextProps.purchaseInfo.HOA
       let rent = nextProps.data[2]
