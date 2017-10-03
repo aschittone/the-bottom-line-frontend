@@ -7,7 +7,8 @@ import {
 	BrowserRouter as Router,
 } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css';
+import ScrollToTop from './ScrollToTop'
 
 
-ReactDOM.render(<Router><App /></Router>, document.getElementById('root'));
+ReactDOM.render(<Router><ScrollToTop><App /></ScrollToTop></Router>, document.getElementById('root'));
 registerServiceWorker();
