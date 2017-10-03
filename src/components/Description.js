@@ -71,11 +71,12 @@ export default class TabsExampleControlled extends React.Component {
   }
 
   handleClick = () => {
-    let price = this.state.purchasePrice === "" ? 0 : this.state.purchasePrice
-    let dp = this.state.downPayment === "" ? 0 : this.state.downPayment
+    
+    let price = this.state.purchasePrice === undefined ? 0 : this.state.purchasePrice
+    let dp = this.state.downPayment === undefined ? 0 : this.state.downPayment
     let mortgage = this.state.mortgage
-    let HOI = this.state.HOI === "" ? 0 : parseInt(this.state.HOI)
-    let HOA = this.state.HOA === "" ? 0 : parseInt(this.state.HOA)
+    let HOI = isNaN(this.state.HOI) ? 0 : parseInt(this.state.HOI)
+    let HOA = isNaN(this.state.HOA) ? 0 : parseInt(this.state.HOA)
     this.props.submitForAnalysis(price, mortgage, dp, HOI, HOA)
   };
 
@@ -100,7 +101,7 @@ export default class TabsExampleControlled extends React.Component {
 
 
   render() {
-    // debugger
+    // 
     let advice;
     if (this.state.financialData.length < 1 && typeof this.state.financialData === "object") {
       advice = <h3>Loading</h3>
@@ -113,7 +114,7 @@ export default class TabsExampleControlled extends React.Component {
         advice = <h3>Please fill out a purchase scenario in order to receive advice</h3>
       } else {
         let data = affordability(this.props, this.state, getMortgage, getMI)
-        // debugger
+        // 
         let message;
         if (data[0].credit < 620 && data[0].assets < (data[0].downpayment + 10000)) {
           message = <h3>Your credit score is too low and you do not have enough cash to buy this property. </h3>
@@ -143,8 +144,8 @@ export default class TabsExampleControlled extends React.Component {
     }
 
     return (
-      <Tabs value={this.state.value} onChange={this.handleChange}>
-        <Tab label="Purchase Details" value="a">
+      <Tabs value={this.state.value} onChange={this.handleChange} >
+        <Tab label="Purchase Details" value="a" style={{ backgroundColor: '#191a1c' }}>
           <div>
             <h2 style={styles.headline}>Enter the additional info below for your cashflow analysis</h2>
             <Grid padded relaxed>
@@ -162,7 +163,7 @@ export default class TabsExampleControlled extends React.Component {
 
           </div>
         </Tab>
-        <Tab label="Mortgage Advice" value="b">
+        <Tab label="Mortgage Advice" value="b" style={{ backgroundColor: '#191a1c' }} >
           <div>
             <h2 style={styles.headline}>Headline</h2>
             {advice}

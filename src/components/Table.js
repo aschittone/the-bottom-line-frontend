@@ -42,7 +42,7 @@ class Table extends React.Component {
 				},
 				{
 					key: 'MFee',
-					name: 'Management Fees',
+					name: 'MISC Fees',
 					editable: true
 				},
 				{
@@ -141,7 +141,7 @@ class Table extends React.Component {
 	handleGridRowsUpdated({ fromRow, toRow, updated }) {
 		let rows = this.state.rows;
 		for (let i = fromRow; i <= toRow; i++) {
-			debugger
+			
 			let rowToUpdate = rows[i];
 			let updatedRow = update(rowToUpdate, { $merge: updated });
 			for (let key in updated) {

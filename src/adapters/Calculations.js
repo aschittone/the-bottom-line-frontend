@@ -55,3 +55,7 @@ export function affordability(props, state, getMortgage, getMI) {
   let rent = props.data[2]
   return [{ income: income, housingPayment: housingPayment, debts: debts, mortgage: mortgage, mi: mi, hoa: HOA, hoi: HOI, taxes: taxes, downpayment: downpayment, credit: credit, assets: assets, rent: rent }]
 }
+
+export function commas(num) {
+ return parseFloat(num).toLocaleString()
+}

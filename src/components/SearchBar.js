@@ -28,14 +28,12 @@ class Demo extends React.Component {
 
 	handleSelect(address) {
 		if (localStorage.getItem('token') && !localStorage.getItem('search')) {
-			debugger
-    // Parse the serialized data back into an aray of objects
-    let a = JSON.stringify([address]);
-    // Push the new data (whether it be an object or anything else) onto the array
-    // Alert the array value
-    localStorage.setItem('search', a);
+			// Parse the serialized data back into an aray of objects
+			let a = JSON.stringify([address]);
+			// Push the new data (whether it be an object or anything else) onto the array
+			// Alert the array value
+			localStorage.setItem('search', a);
 		} else if (localStorage.getItem('token') && localStorage.getItem('search')) {
-			debugger
 			let searches = JSON.parse(localStorage.getItem('search'))
 			searches.push(address)
 			localStorage.setItem('search', JSON.stringify(searches));
@@ -52,43 +50,43 @@ class Demo extends React.Component {
 
 	render() {
 
-		  const cssClasses = {
-      root: 'form-group',
-      input: 'Demo__search-input',
-      autocompleteContainer: 'Demo__autocomplete-container',
-    }
+		const cssClasses = {
+			root: 'form-group',
+			input: 'Demo__search-input',
+			autocompleteContainer: 'Demo__autocomplete-container',
+		}
 
-    const AutocompleteItem = ({ formattedSuggestion }) => (
-      <div className="Demo__suggestion-item">
-        <i className='fa fa-map-marker Demo__suggestion-icon'/>
-        <strong>{formattedSuggestion.mainText}</strong>{' '}
-        <small className="text-muted">{formattedSuggestion.secondaryText}</small>
-      </div>)
+		const AutocompleteItem = ({ formattedSuggestion }) => (
+			<div className="Demo__suggestion-item">
+				<i className='fa fa-map-marker Demo__suggestion-icon' />
+				<strong>{formattedSuggestion.mainText}</strong>{' '}
+				<small className="text-muted">{formattedSuggestion.secondaryText}</small>
+			</div>)
 
-    const inputProps = {
-      type: "text",
-      value: this.state.address,
-      onChange: this.handleChange,
-      autoFocus: true,
-      placeholder: "Search Places",
-      name: 'Demo__input',
-      id: "my-input-id",
-    }
+		const inputProps = {
+			type: "text",
+			value: this.state.address,
+			onChange: this.handleChange,
+			autoFocus: true,
+			placeholder: "Search Places",
+			name: 'Demo__input',
+			id: "my-input-id",
+		}
 
 
 		return (
 
 			<div style={{ ...styles.main }} className='page-wrapper div-with-bg'>
-						<div className='container' style={{ ...styles.container }}>
-							<PlacesAutocomplete
-								autocompleteItem={AutocompleteItem}
-								onSelect={this.handleSelect}
-								onEnterKeyDown={this.handleSelect}
-								classNames={cssClasses}
-								inputProps={inputProps}
-								options={{ types: ['address'] }}
-							/>
-						</div>
+				<div className='container' style={{ ...styles.container }}>
+					<PlacesAutocomplete
+						autocompleteItem={AutocompleteItem}
+						onSelect={this.handleSelect}
+						onEnterKeyDown={this.handleSelect}
+						classNames={cssClasses}
+						inputProps={inputProps}
+						options={{ types: ['address'] }}
+					/>
+				</div>
 			</div>
 		)
 	}
