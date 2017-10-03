@@ -47,7 +47,7 @@ export default class TabsExampleControlled extends React.Component {
   }
 
   changeHOA = (value) => {
-    debugger
+
     this.setState({
       HOA: value
     })
@@ -76,7 +76,7 @@ export default class TabsExampleControlled extends React.Component {
     let price = this.state.purchasePrice === undefined ? 0 : this.state.purchasePrice
     let dp = this.state.downPayment === undefined ? 0 : this.state.downPayment
     let mortgage = this.state.mortgage
-    debugger
+
     let HOI = isNaN(this.state.HOI) ? 0 : parseInt(this.state.HOI)
     let HOA = isNaN(this.state.HOA) ? 0 : parseInt(this.state.HOA)
     this.props.submitForAnalysis(price, mortgage, dp, HOI, HOA)
