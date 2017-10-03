@@ -95,7 +95,7 @@ class Main extends React.Component {
 					})
 				} else {
 					localStorage.setItem("token", user.jwt)
-					this.props.history.push("/user/listings")
+					this.props.history.go(-1)
 				}
 			})
 	}
@@ -110,86 +110,86 @@ class Main extends React.Component {
 
 		return (
 			<div>
-				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg}/> : null}
+				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg} /> : null}
 				<MuiThemeProvider muiTheme={getMuiTheme()}>
 					<div style={{ ...styles.main }} className="div-with-bg">
 						<Card style={styles.card}>
 							<div style={styles.avatar}>
 								<Avatar backgroundColor={accent1Color} icon={<LockIcon />} size={60} />
 							</div>
-						<Formsy.Form
-							onValid={this.enableButton}
-							onInvalid={this.disableButton}
-							onValidSubmit={this.submitForm}
-							onInvalidSubmit={this.notifyFormError}	>
-								
-							<div style={styles.form}>
+							<Formsy.Form
+								onValid={this.enableButton}
+								onInvalid={this.disableButton}
+								onValidSubmit={this.submitForm}
+								onInvalidSubmit={this.notifyFormError}	>
+
+								<div style={styles.form}>
 									<p style={styles.hint}>Hint: demo / demo</p>
 
 
 									<div style={styles.input} >
-								<FormsyText
-								name="fullName"
-								required
-								hintText="Full Name"
-								floatingLabelText="Full Name"
-							/>
+										<FormsyText
+											name="fullName"
+											required
+											hintText="Full Name"
+											floatingLabelText="Full Name"
+										/>
 									</div>
 
 
 
 									<div style={styles.input} >
-							<FormsyText
-								name="email"
-								validations="isEmail"
-								validationError={"Please enter a valid email"}
-								required
-								hintText="Username"
-								floatingLabelText="Username"
-							/>
+										<FormsyText
+											name="email"
+											validations="isEmail"
+											validationError={"Please enter a valid email"}
+											required
+											hintText="Username"
+											floatingLabelText="Username"
+										/>
 									</div>
 
 
 
 									<div style={styles.input} >
-							<FormsyText
-								name="password"
-								type="password"
-								required
-								hintText="Password"
-								floatingLabelText="Password"
-								updateImmediately
-							/>
+										<FormsyText
+											name="password"
+											type="password"
+											required
+											hintText="Password"
+											floatingLabelText="Password"
+											updateImmediately
+										/>
 									</div>
 
 
 
 									<div style={styles.input} >
-							<FormsyText
-								name="repeated_password"
-								validations="equalsField:password"
-								validationError={"passwords do not match"}
-								type="password"
-								required
-								hintText="Confirm Password"
-								floatingLabelText="Confirm Password"
-								updateImmediately
-							/>
+										<FormsyText
+											name="repeated_password"
+											validations="equalsField:password"
+											validationError={"passwords do not match"}
+											type="password"
+											required
+											hintText="Confirm Password"
+											floatingLabelText="Confirm Password"
+											updateImmediately
+										/>
 									</div>
-								
-						</div>
 
-							<CardActions>
-								<RaisedButton
-									type="submit"
-									label="Submit"
-									disabled={!this.state.canSubmit}
-									fullWidth
-								/>
-							</CardActions>
-						</Formsy.Form>
+								</div>
+
+								<CardActions>
+									<RaisedButton
+										type="submit"
+										label="Submit"
+										disabled={!this.state.canSubmit}
+										fullWidth
+									/>
+								</CardActions>
+							</Formsy.Form>
 						</Card>
-						</div>
+					</div>
 				</MuiThemeProvider>
 			</div>
 		);
@@ -198,4 +198,3 @@ class Main extends React.Component {
 
 export default Main;
 
-	
