@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {
-	BrowserRouter as Router,
+	BrowserRouter as Router, Route
 } from 'react-router-dom'
 import 'semantic-ui-css/semantic.min.css';
-import ScrollToTop from './ScrollToTop'
 
 
-ReactDOM.render(<Router><ScrollToTop><App /></ScrollToTop></Router>, document.getElementById('root'));
+
+ReactDOM.render(
+	<Router>
+		<div>
+			<App />
+		</div>
+	</Router>,
+	document.getElementById('root'));
 registerServiceWorker();
