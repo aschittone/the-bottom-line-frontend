@@ -12,7 +12,9 @@ const styles = {
 		justifyContent: 'center',
 	},
 	container: {
-		height: '200px'
+		height: '200px',
+		textAlign: 'center',
+		zIndex: 1
 	}
 }
 
@@ -77,7 +79,10 @@ class Demo extends React.Component {
 		return (
 
 			<div style={{ ...styles.main }} className='page-wrapper div-with-bg'>
+				<div className="blur"></div>
 				<div className='container' style={{ ...styles.container }}>
+					<h1 className='title'>Simply analyze potential cash flow.</h1>
+					<h2 className='sub-title'>Valuation Estimates. Rent Estimates. Cash flow analysis.</h2>
 					<PlacesAutocomplete
 						autocompleteItem={AutocompleteItem}
 						onSelect={this.handleSelect}

@@ -97,7 +97,7 @@ class Main extends React.Component {
 			.then((res) => {
 				if (res.msg === "Success") {
 					localStorage.setItem("token", res.jwt)
-					this.props.history.push("/user/listings")
+					this.props.history.go(-1)
 				} else {
 					this.setState({
 						errorMsg: res.msg

@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <MuiThemeProvider>
         <div>
-          <Navbar />
+          <Navbar {...this.props} />
           <MainDisplayContainer />
           <Footer />
         </div>

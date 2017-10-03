@@ -4,6 +4,8 @@ import MenuItem from 'material-ui/MenuItem';
 import AppBar from 'material-ui/AppBar';
 import Auth from '../adapters/auth'
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router-dom'
+
 
 
 export default class DrawerUndockedExample extends React.Component {
@@ -17,27 +19,9 @@ export default class DrawerUndockedExample extends React.Component {
 	handleToggle = () => this.setState({ open: !this.state.open });
 
 	handleClose = (event) => {
-		switch (event.target.innerText) {
-			case "Search":
-				this.props.history.push('/')
-				break;
-			case "Saved Listings":
-				this.props.history.push('/user/listings')
-				break;
-			case "LOGIN":
-				this.props.history.push('/login')
-				break;
-			case "SIGNUP" || "Signup":
-				this.props.history.push('/signup')
-				break;
-			case "LOGOUT":
-				Auth.logOut()
-				this.props.history.push('/')
-				break;
-			default:
-				null
+		if (event.target.innerText === "Logout") {
+			Auth.logOut()
 		}
-
 		this.setState({ open: false });
 	}
 
@@ -62,9 +46,9 @@ export default class DrawerUndockedExample extends React.Component {
 					width={200}
 					open={this.state.open}
 					onRequestChange={(open) => this.setState({ open })}>
-					<MenuItem onClick={this.handleClose}>Search</MenuItem>
-					<MenuItem onClick={this.handleClose}>Saved Listings</MenuItem>
-					{localStorage.getItem('token') ? <MenuItem onClick={this.handleClose}>Logout</MenuItem> : <div><MenuItem onClick={this.handleClose}>Login</MenuItem><MenuItem onClick={this.handleClose}>Signup</MenuItem></div>}
+					<Link to="/" ><MenuItem onClick={this.handleClose}>Search</MenuItem></Link>
+					<Link to="/user/listings" ><MenuItem onClick={this.handleClose}>Saved Listings</MenuItem></Link>
+					{localStorage.getItem('token') ? <Link to="/"><MenuItem onClick={this.handleClose}>Logout</MenuItem> </Link> : <div><Link to="/login"><MenuItem onClick={this.handleClose}>Login</MenuItem></Link><Link to="/signup"><MenuItem onClick={this.handleClose}>Signup</MenuItem></Link></div>}
 				</Drawer>
 			</div>
 		);
