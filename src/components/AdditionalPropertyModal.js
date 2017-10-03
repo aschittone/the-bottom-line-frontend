@@ -15,23 +15,23 @@ export default class DialogExampleSimple extends React.Component {
   };
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleClose = () => {
-    this.setState({open: false});
-	};
-	
-	goToListing = (address) => {
-		this.props.history.history.history.push(`/listing/${address}`)
-		window.location.reload()
-	}
+    this.setState({ open: false });
+  };
+
+  goToListing = (address) => {
+    this.props.history.history.history.push(`/listing/${address}+second`)
+    window.location.reload()
+  }
 
   render() {
 
-		const condos = this.props.data.data.map(address => {
-			return (<li onClick={() => this.goToListing(address)}>{address}</li>)
-		})
+    const condos = this.props.data.data.map(address => {
+      return (<li onClick={() => this.goToListing(address)}>{address}</li>)
+    })
 
     return (
       <div>
@@ -41,9 +41,9 @@ export default class DialogExampleSimple extends React.Component {
           open={this.state.open}
           onRequestClose={this.handleClose}
         >
-				 <ul>
-					{condos}
-				 </ul>
+          <ul>
+            {condos}
+          </ul>
         </Dialog>
       </div>
     );

@@ -10,61 +10,54 @@ import Button from './Button'
 import Auth from '../adapters/auth'
 import SnackBar from './SnackBar'
 import LoginModal from './LoginModal'
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
+import { commas } from '../adapters/Calculations'
+
+
+
+
 
 
 export default class ListExampleNested extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      saved: '',
+      saved: false,
     };
     this.handleClick = this.handleClick.bind(this)
 
   }
 
   handleClick = () => {
-    this.setState({
-      saved: ''
-    })
-    if (localStorage.getItem('token')) {
-      Auth.save(this.props)
-        .then((msg) => {
-          this.setState({
-            saved: msg.msg
-          })
+    Auth.save(this.props)
+      .then((msg) => {
+        this.setState({
+          saved: msg.msg
         })
-    } else {
-      this.setState({
-        saved: false,
       })
-    }
+    this.setState({
+      saved: false,
+    })
   }
-
-  componentDidUpdate() {
-    if (this.state.saved === false) {
-      this.setState({
-        saved: ''
-      })
-    }
-  }
-
 
   render() {
     console.log(this.props)
+    debugger
     if (this.props[0].useCode.toLowerCase() === "condominium") {
       return (
         <div>
           <List>
-            <Subheader>Property Details (2017)</Subheader>
-            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate.amount}`} leftIcon={<ContentSend />} />
-            <ListItem primaryText={`Taxes: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].assessment.tax.taxamt}`} leftIcon={<ContentSend />} />
-            <ListItem primaryText="HOA Fees: N/A" leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
+            <ListItem primaryText={`Estimated Value: $${commas(this.props[0].zestimate.amount)}`} />
+            <ListItem primaryText={`Estimated Rent: $${commas(this.props[2])}`} />
+            <ListItem primaryText={`Rent Valuation Range: ${this.props[0].rentzestimate.valuationRange.high === undefined || this.props[0].rentzestimate.valuationRange.low === undefined ? "N/A" : "$" + commas(this.props[0].rentzestimate.valuationRange.low) + " - " + "$" + commas(this.props[0].rentzestimate.valuationRange.high)}`} />
+            <ListItem primaryText="HOA Fees: N/A" />
+            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + "sqft"}`} />
+            <ListItem primaryText={`Lot: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].lot.lotnum}`} />
+            <ListItem primaryText={`Block: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].area.blockNum}`} />
           </List>
-          {this.state.saved !== false && this.state.saved !== '' ? <SnackBar text={this.state.saved} /> : null}
-          {this.state.saved === false ? <LoginModal text={this.state.saved} {...this.props} /> : null}
+          {this.state.saved !== false && this.state.saved !== 'You must be logged in to save' ? <SnackBar text={this.state.saved} /> : null}
+          {this.state.saved === 'You must be logged in to save' ? <LoginModal text={this.state.saved} {...this.props} /> : null}
           <Button label="Save Listing" handleClick={this.handleClick} />
         </div>
       );
@@ -72,19 +65,25 @@ export default class ListExampleNested extends React.Component {
       return (
         <div>
           <List>
-            <Subheader>Property Details (2017)</Subheader>
-            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate.amount}`} leftIcon={<ContentSend />} />
-            <ListItem primaryText={`Taxes: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].assessment.tax.taxamt}`} leftIcon={<ContentSend />} />
-            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt} sqft`} leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt} sqft`} leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Property Type: ${this.props[0].useCode}`} leftIcon={<ContentDrafts />} />
-            <ListItem primaryText={`Year Built: ${this.props[0].yearBuilt}`} leftIcon={<ContentSend />} />
+            <ListItem primaryText={`Estimated Value: $${commas(this.props[0].zestimate.amount)}`} />
+            <ListItem primaryText={`Estimated Rent: $${commas(this.props[2])}`} />
+            <ListItem primaryText={`Rent Valuation Range: ${this.props[0].rentzestimate.valuationRange.high === undefined || this.props[0].rentzestimate.valuationRange.low === undefined ? "N/A" : "$" + commas(this.props[0].rentzestimate.valuationRange.low) + " - " + "$" + commas(this.props[0].rentzestimate.valuationRange.high)}`} />
+            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + "sqft"}`} />
+            <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt === undefined ? "N/A" : commas(this.props[0].lotSizeSqFt) + "sqft"}`} />
+            <ListItem primaryText={`Lot: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].lot.lotnum}`} />
+            <ListItem primaryText={`Block: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].area.blockNum}`} />
           </List>
-          {this.state.saved !== false && this.state.saved !== '' ? <SnackBar text={this.state.saved} /> : null}
-          {this.state.saved === false ? <LoginModal text={this.state.saved} {...this.props} /> : null}
+          {this.state.saved !== false && this.state.saved !== 'You must be logged in to save' ? <SnackBar text={this.state.saved} /> : null}
+          {this.state.saved === 'You must be logged in to save' ? <LoginModal text={this.state.saved} {...this.props} /> : null}
           <Button label="Save Listing" handleClick={this.handleClick} />
         </div>
       );
     }
   }
 }
+
+
+
+
+
+
