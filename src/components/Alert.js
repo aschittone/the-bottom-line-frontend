@@ -20,7 +20,7 @@ export default class DialogExampleAlert extends React.Component {
 	}
 
 	handleClick = (lastHistory) => {
-		this.props.history.history.push('/search')
+		this.props.history.history.push('/')
 	}
 
 	render() {

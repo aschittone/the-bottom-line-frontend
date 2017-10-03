@@ -19,7 +19,7 @@ export default class DrawerUndockedExample extends React.Component {
 	handleClose = (event) => {
 		switch (event.target.innerText) {
 			case "Search":
-				this.props.history.push('/search')
+				this.props.history.push('/')
 				break;
 			case "Saved Listings":
 				this.props.history.push('/user/listings')
@@ -32,7 +32,7 @@ export default class DrawerUndockedExample extends React.Component {
 				break;
 			case "LOGOUT":
 				Auth.logOut()
-				this.props.history.push('/search')
+				this.props.history.push('/')
 				break;
 			default:
 				null
