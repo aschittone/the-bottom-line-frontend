@@ -28,7 +28,6 @@ export default class DialogExampleSimple extends React.Component {
   }
 
   render() {
-
     const condos = this.props.data.data.map(address => {
       return (<li onClick={() => this.goToListing(address)}>{address}</li>)
     })
