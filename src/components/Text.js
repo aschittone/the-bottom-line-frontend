@@ -30,7 +30,11 @@ class TextFieldExampleSimple extends React.Component {
 					hintText={this.props.label}
 					floatingLabelText={this.props.label}
 					onChange={this.handleChange}
-					errorText={this.state.errorText} />
+					errorText={this.state.errorText}
+					floatingLabelStyle={{ color: '#000' }}
+					floatingLabelFocusStyle={{ color: '#000' }}
+					underlineFocusStyle={{ borderColor: '#000' }}
+				/>
 			</div>
 		)
 	}

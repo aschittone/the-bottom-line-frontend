@@ -19,7 +19,7 @@ const styles = {
 const TabsExampleIconText = (props) => (
 	<Tabs>
 		<Tab
-			icon={<FontIcon className="material-icons">phone</FontIcon>}
+			icon={<FontIcon className="material-icons">home</FontIcon>}
 			style={{ backgroundColor: '#191a1c' }}
 		>
 			<div>
@@ -29,7 +29,7 @@ const TabsExampleIconText = (props) => (
 		</Tab>
 
 		<Tab
-			icon={<FontIcon className="material-icons">favorite</FontIcon>}
+			icon={<FontIcon className="material-icons">attach_money</FontIcon>}
 			style={{ backgroundColor: '#191a1c' }}
 		>
 			<div>

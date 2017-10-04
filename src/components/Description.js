@@ -110,31 +110,31 @@ export default class TabsExampleControlled extends React.Component {
     if (this.state.financialData.length < 1 && typeof this.state.financialData === "object") {
       advice = <h3>Loading</h3>
     } else if (this.state.financialData[0] !== undefined && this.state.financialData[0].average_annual_income === "0") {
-      advice = (<div><h3>Please fill out your financial profile in order to receive mortgage advice.</h3>
+      advice = (<div><h3 style={styles.headline}>Please fill out your financial profile in order to receive mortgage advice.</h3>
         <Link to="/user/listings" ><Button label="Fill out my profile" /></Link></div>)
     } else if (this.state.financialData === '') {
       localStorage.setItem('lastUrl', window.location)
-      advice = (<div><h3>Please login to see if you can afford this house.</h3>
+      advice = (<div><h3 style={styles.headline}>Please login to see if you can afford this house.</h3>
         <Link to='/signup'><Button label="Signup" /></Link>
         <Link to="/login" > <Button label="Login" /></Link ></div >)
     } else {
       if (this.props.purchasePrice === '') {
-        advice = <h3>Please fill out a purchase scenario in order to receive advice.</h3>
+        advice = <h3 style={styles.headline}>Please fill out a purchase scenario in order to receive advice.</h3>
       } else {
         let data = affordability(this.props, this.state, getMortgage, getMI)
         // 
         let message;
         if (data[0].credit < 620 && data[0].assets < (data[0].downpayment + 10000)) {
-          message = <h3>Your credit score is too low and you do not have enough cash to buy this property. </h3>
+          message = <h3 style={styles.headline}>Your credit score is too low and you do not have enough cash to buy this property. </h3>
         } else if (data[0].credit < 620) {
-          message = <h3>Your credit score is too low obtain a mortgage with these parameters. </h3>
+          message = <h3 style={styles.headline}>Your credit score is too low obtain a mortgage with these parameters. </h3>
         } else if (data[0].assets < (data[0].downpayment + 10000)) {
-          message = <h3>Based on your financial profile, you do not have enough money to purchase this property</h3>
+          message = <h3 style={styles.headline}>Based on your financial profile, you do not have enough money to purchase this property</h3>
         }
         else if (((data[0].debts + data[0].housingPayment) / (data[0].income) > .45 + data[0].rent)) {
-          message = <h3>Based on your financial profile that you filled out, you will not be able to get a mortgage with these paramaters. This is too expensive for you. </h3>
+          message = <h3 style={styles.headline}>Based on your financial profile that you filled out, you will not be able to get a mortgage with these paramaters. This is too expensive for you. </h3>
         } else {
-          message = <h3>Based on your financial profile that you filled out, you should be able to obtain financing with these paramters:</h3>
+          message = <h3 style={styles.headline}>Based on your financial profile that you filled out, you should be able to obtain financing with these paramters:</h3>
         }
         advice = (
           <div>
@@ -156,7 +156,8 @@ export default class TabsExampleControlled extends React.Component {
       <Tabs value={this.state.value} onChange={this.handleChange} >
         <Tab label="Purchase Details" value="a" style={{ backgroundColor: '#191a1c' }}>
           <div>
-            <h2 style={styles.headline}>Enter the additional info below for your cashflow analysis</h2>
+            <h2 style={styles.headline}>Calculate cash flow based on purchase parameters</h2>
+            <h4>Enter the additional info below to fill in the table on the right, and calculate your cash flow. Once you click Calculate you can edit the grid to adjust the rent/expenses.</h4>
             <Grid padded relaxed>
               <Grid.Row>
                 <Grid.Column width={8}>
