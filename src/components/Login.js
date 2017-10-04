@@ -137,15 +137,19 @@ class Main extends React.Component {
 								onValidSubmit={this.submitForm}
 								onInvalidSubmit={this.notifyFormError}>
 								<div style={styles.form}>
-									<p style={styles.hint}>Hint: demo / demo</p>
+									<p style={styles.hint}>Login</p>
 									<div style={styles.input} >
 										<FormsyText
 											name="email"
 											validations="isEmail"
 											validationError={"Please enter a valid email"}
 											required
-											hintText="Username"
-											floatingLabelText="Username"
+											hintText="Email"
+											floatingLabelText="Email"
+											floatingLabelStyle={{ color: '#000' }}
+											floatingLabelFocusStyle={{ color: '#000' }}
+											underlineFocusStyle={{ borderColor: '#000' }}
+
 										/>
 									</div>
 									<div style={styles.input} >
@@ -156,6 +160,10 @@ class Main extends React.Component {
 											hintText="Password"
 											floatingLabelText="Password"
 											updateImmediately
+											floatingLabelStyle={{ color: '#000' }}
+											floatingLabelFocusStyle={{ color: '#000' }}
+											underlineFocusStyle={{ borderColor: '#000' }}
+
 										/>
 									</div>
 								</div>

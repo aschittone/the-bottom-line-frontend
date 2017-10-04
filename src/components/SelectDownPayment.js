@@ -28,6 +28,10 @@ export default class DropDownMenuLongMenuExample extends Component {
         onChange={this.handleChange}
         maxHeight={200}
         floatingLabelText="Down Payment"
+        floatingLabelStyle={{ color: '#000' }}
+        floatingLabelFocusStyle={{ color: '#000' }}
+        underlineFocusStyle={{ borderColor: '#000' }}
+
       >
         {items}
       </SelectField>
