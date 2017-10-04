@@ -7,6 +7,8 @@ import SignUp from './SignUp'
 import UserDisplayContainer from './UserDisplayContainer'
 import authorize from './HOC/authorize'
 import NotFound from './NotFound';
+import ZillowWidget from './ZillowWidget';
+
 
 
 
@@ -29,6 +31,7 @@ class gridInstance extends React.Component {
 					<Route path="/signup" render={(props) => (<SignUp {...props} />)} />
 					<Route path="/login" render={(props) => (<Login {...props} />)} />
 					<Route path="/user/listings" component={authorize(UserDisplayContainer)} />
+					<Route path="/search/zillow" component={ZillowWidget} />
 					<Route component={NotFound} />
 				</Switch>
 			</div>

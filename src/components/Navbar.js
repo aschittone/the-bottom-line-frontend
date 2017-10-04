@@ -35,11 +35,12 @@ export default class DrawerUndockedExample extends React.Component {
 		return (
 			<div>
 				<AppBar
-					title="Title"
+					className="nav"
+					title="Bottom Line"
 					iconClassNameRight="muidocs-icon-navigation-expand-more"
 					onLeftIconButtonTouchTap={this.handleToggle}
 					style={{ backgroundColor: '#191a1c', position: "fixed" }}
-					iconElementRight={localStorage.getItem('token') ? <FlatButton onClick={this.handleClose} label="Logout" /> : <FlatButton onClick={this.handleClose} label="Login" />}
+
 				/>
 				<Drawer
 					docked={false}
