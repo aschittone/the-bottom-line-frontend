@@ -62,8 +62,7 @@ class translate extends React.Component {
 					}
 				</div>
 				<CardActions style={{ textAlign: 'right' }}>
-					<FlatButton label="search" icon={<HomeIcon />} href="https://marmelab.com/admin-on-rest/" />
-					<FlatButton label="another button" href="https://github.com/marmelab/admin-on-rest-demo" />
+					<FlatButton label="search" icon={<HomeIcon />} href="https://the-bottom-line.herokuapp.com/" />
 				</CardActions>
 			</Card>
 		)
