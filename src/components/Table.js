@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import update from 'immutability-helper';
 import CountTo from 'react-count-to';
 import { Grid } from 'semantic-ui-react'
+import { commas } from '../adapters/Calculations'
+
 const ReactDataGrid = require('react-data-grid');
 const React = require('react');
 
@@ -141,7 +143,7 @@ class Table extends React.Component {
 	handleGridRowsUpdated({ fromRow, toRow, updated }) {
 		let rows = this.state.rows;
 		for (let i = fromRow; i <= toRow; i++) {
-			
+
 			let rowToUpdate = rows[i];
 			let updatedRow = update(rowToUpdate, { $merge: updated });
 			for (let key in updated) {
@@ -169,13 +171,13 @@ class Table extends React.Component {
 				<Grid padded relaxed textAlign="center">
 					<Grid.Row>
 						<Grid.Column width={5}>
-							<h2 style={styles.headline}>Annual Cash flow: <CountTo to={this.state.totals[0].totals.annualCashflow} speed={1234} /></h2>
+							<h2 style={styles.headline}>Annual Cash flow: $<CountTo to={this.state.totals[0].totals.annualCashflow} speed={1234} /> </h2>
 						</Grid.Column>
 						<Grid.Column width={5}>
-							<h2 style={styles.headline}>Average Monthly Cash flow: <CountTo to={this.state.totals[0].totals.averageMonthlyCashflow} speed={1234} /></h2>
+							<h2 style={styles.headline}>Average Monthly Cash flow: $<CountTo to={this.state.totals[0].totals.averageMonthlyCashflow} speed={1234} /></h2>
 						</Grid.Column>
 						<Grid.Column width={5}>
-							<h2 style={styles.headline}>Mortgage Payment (P&I): <CountTo to={this.state.totals[0].totals.mortgagePayment} speed={1234} /></h2>
+							<h2 style={styles.headline}>Mortgage Payment (P&I): $<CountTo to={this.state.totals[0].totals.mortgagePayment} speed={1234} /></h2>
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
