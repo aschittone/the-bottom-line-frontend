@@ -95,7 +95,7 @@ class GridExampleCelled extends React.Component {
 								<HouseDetailsTabs {...this.state.data} {...this.props} />
 							</Grid.Column>
 							<Grid.Column verticalAlign='middle' textAlign='center' >
-								{this.state.data[1] === "Error: comps not available for the specified property identifier" ? <h3>Comparable sales are not available for this property</h3> : <DisplayComps {...this.state.data} {...this.props} />}
+								{this.state.data[1] === "Error: comps not available for the specified property identifier" || this.state.data[1] === "Error: no comps for the specified property were found" ? <h3>Comparable sales are not available for this property</h3> : <DisplayComps {...this.state.data} {...this.props} />}
 							</Grid.Column>
 						</Grid.Row>
 						<Grid.Row>
