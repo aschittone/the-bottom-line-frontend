@@ -30,10 +30,7 @@ class Demo extends React.Component {
 
 	handleSelect(address) {
 		if (localStorage.getItem('token') && !localStorage.getItem('search')) {
-			// Parse the serialized data back into an aray of objects
 			let a = JSON.stringify([address]);
-			// Push the new data (whether it be an object or anything else) onto the array
-			// Alert the array value
 			localStorage.setItem('search', a);
 		} else if (localStorage.getItem('token') && localStorage.getItem('search')) {
 			let searches = JSON.parse(localStorage.getItem('search'))
@@ -70,19 +67,18 @@ class Demo extends React.Component {
 			value: this.state.address,
 			onChange: this.handleChange,
 			autoFocus: true,
-			placeholder: "Property Address to Analyze",
+			placeholder: "Property Address to Analyze (must be an acutal street address)",
 			name: 'Demo__input',
 			id: "my-input-id",
 		}
-
 
 		return (
 
 			<div style={{ ...styles.main }} className='page-wrapper div-with-bg'>
 				<div className="blur"></div>
 				<div className='container' style={{ ...styles.container }}>
-					<h1 className='title'>Simply analyze potential cash flow.</h1>
-					<h2 className='sub-title'>Valuation Estimates. Rent Estimates. Cash flow analysis.</h2>
+					<h1 className='title'>Figure out your bottom line.</h1>
+					<h2 className='sub-title'>Simply analyze potential cash flow for rental properties.</h2>
 					<PlacesAutocomplete
 						autocompleteItem={AutocompleteItem}
 						onSelect={this.handleSelect}
