@@ -28,7 +28,7 @@ class translate extends React.Component {
                 if (i > ((searches.length - 1) - 7)) {
                     recentSearches.push((<ListItem
                         key={i}
-                        href={`http://localhost:3001/listing/${searches[i]}`}
+                        href={`https://the-bottom-line.herokuapp.com/listing/${searches[i]}`}
                         primaryText={searches[i]}
                     />))
                 }

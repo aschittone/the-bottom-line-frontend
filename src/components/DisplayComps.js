@@ -30,11 +30,7 @@ class GridListExampleSimple extends React.Component {
 
 	goToListing = (address) => {
 		if (localStorage.getItem('token') && !localStorage.getItem('search')) {
-
-			// Parse the serialized data back into an aray of objects
 			let a = JSON.stringify([address]);
-			// Push the new data (whether it be an object or anything else) onto the array
-			// Alert the array value
 			localStorage.setItem('search', a);
 		} else if (localStorage.getItem('token') && localStorage.getItem('search')) {
 

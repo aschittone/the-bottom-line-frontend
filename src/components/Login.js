@@ -97,7 +97,8 @@ class Main extends React.Component {
 			.then((res) => {
 				if (res.msg === "Success") {
 					localStorage.setItem("token", res.jwt)
-					let url = localStorage.getItem('lastUrl') ? localStorage.getItem('lastUrl') : localStorage.setItem('lastUrl', window.location)
+					localStorage.getItem('lastUrl') ? localStorage.getItem('lastUrl') : localStorage.setItem('lastUrl', window.location)
+					let url = localStorage.getItem('lastUrl')
 					let split = url.split("/")
 					if (split[3] === "listing") {
 						this.props.history.go(-1)

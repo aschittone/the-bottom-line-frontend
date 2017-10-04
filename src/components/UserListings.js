@@ -29,13 +29,13 @@ export default class translate extends React.Component {
 		let items = []
 		if (this.props.data !== '' && this.props.data[0] !== undefined) {
 			this.props.data[1].map((listing, i) => {
-				items.push(<div><ListItem
-					key={i}
-					href={`http://localhost:3001/listing/${listing.address}`}
-					primaryText={listing.address}
-					secondaryText={<p>"paraghraph"</p>} />
-					<Button basic color='red' onClick={() => this.handleClick(listing.address)}>Unsave Listing</Button>
-				</div>
+				items.push(<div>
+					<ListItem
+						key={i}
+						href={`https://the-bottom-line.herokuapp.com/listing/${listing.address}`}
+						primaryText={listing.address} />
+					<Button basic color='red' onClick={() => this.handleClick(listing.address)}> Unsave Listing</Button>
+				</div >
 				)
 			}
 			)
