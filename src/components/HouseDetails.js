@@ -52,7 +52,7 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Estimated Rent: $${this.props[0].rentzestimate === undefined ? "N/A" : commas(this.props[2])}`} />
             <ListItem primaryText={`Rent Valuation Range: ${this.props[0].rentzestimate === undefined || this.props[0].rentzestimate.valuationRange.low === undefined ? "N/A" : "$" + commas(this.props[0].rentzestimate.valuationRange.low) + " - " + "$" + commas(this.props[0].rentzestimate.valuationRange.high)}`} />
             <ListItem primaryText="HOA Fees: N/A" />
-            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + "sqft"}`} />
+            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + " sqft"}`} />
             <ListItem primaryText={`Lot: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].lot.lotnum}`} />
             <ListItem primaryText={`Block: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].area.blockNum}`} />
           </List>
@@ -68,8 +68,8 @@ export default class ListExampleNested extends React.Component {
             <ListItem primaryText={`Estimated Value: $${this.props[0].zestimate === undefined ? "N/A" : commas(this.props[0].zestimate.amount)}`} />
             <ListItem primaryText={`Estimated Rent: $${this.props[0].rentzestimate === undefined ? "N/A" : commas(this.props[2])}`} />
             <ListItem primaryText={`Rent Valuation Range: ${this.props[0].rentzestimate === undefined || this.props[0].rentzestimate.valuationRange.low === undefined ? "N/A" : "$" + commas(this.props[0].rentzestimate.valuationRange.low) + " - " + "$" + commas(this.props[0].rentzestimate.valuationRange.high)}`} />
-            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + "sqft"}`} />
-            <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt === undefined ? "N/A" : commas(this.props[0].lotSizeSqFt) + "sqft"}`} />
+            <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + " sqft"}`} />
+            <ListItem primaryText={`Lot Size: ${this.props[0].lotSizeSqFt === undefined ? "N/A" : commas(this.props[0].lotSizeSqFt) + " sqft"}`} />
             <ListItem primaryText={`Lot: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].lot.lotnum}`} />
             <ListItem primaryText={`Block: ${this.props[3] === "tax data not available" ? this.props[3] : JSON.parse(this.props[3].body).property[0].area.blockNum}`} />
           </List>

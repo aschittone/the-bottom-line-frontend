@@ -70,7 +70,7 @@ class Demo extends React.Component {
 			value: this.state.address,
 			onChange: this.handleChange,
 			autoFocus: true,
-			placeholder: "Search Places",
+			placeholder: "Property Address to Analyze",
 			name: 'Demo__input',
 			id: "my-input-id",
 		}
