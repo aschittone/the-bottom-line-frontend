@@ -95,7 +95,13 @@ class Main extends React.Component {
 					})
 				} else {
 					localStorage.setItem("token", user.jwt)
-					this.props.history.go(-1)
+					let url = localStorage.getItem('lastUrl') ? localStorage.getItem('lastUrl') : localStorage.setItem('lastUrl', window.location)
+					let split = url.split("/")
+					if (split[3] === "listing") {
+						this.props.history.go(-1)
+					} else {
+						this.props.history.push('/')
+					}
 				}
 			})
 	}
@@ -110,6 +116,7 @@ class Main extends React.Component {
 
 		return (
 			<div>
+				<div className="blur"></div>
 				{this.state.errorMsg !== '' ? <SnackBar text={this.state.errorMsg} /> : null}
 				<MuiThemeProvider muiTheme={getMuiTheme()}>
 					<div style={{ ...styles.main }} className="div-with-bg">

@@ -47,7 +47,7 @@ export default class DrawerUndockedExample extends React.Component {
 					open={this.state.open}
 					onRequestChange={(open) => this.setState({ open })}>
 					<Link to="/" ><MenuItem onClick={this.handleClose}>Search</MenuItem></Link>
-					<Link to="/user/listings" ><MenuItem onClick={this.handleClose}>Saved Listings</MenuItem></Link>
+					{localStorage.getItem('token') ? <Link to="/user/listings" ><MenuItem onClick={this.handleClose}>Profile</MenuItem></Link> : null}
 					{localStorage.getItem('token') ? <Link to="/"><MenuItem onClick={this.handleClose}>Logout</MenuItem> </Link> : <div><Link to="/login"><MenuItem onClick={this.handleClose}>Login</MenuItem></Link><Link to="/signup"><MenuItem onClick={this.handleClose}>Signup</MenuItem></Link></div>}
 				</Drawer>
 			</div>
