@@ -1,14 +1,24 @@
-
-
-
 import React from 'react';
 import { Card, CardTitle } from 'material-ui/Card';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import { Button } from 'semantic-ui-react'
-
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 const style = { flex: 1 };
+const iconStyle = { margin: 5 };
+
+const iconButtonElement = (
+	<IconButton
+		touch={true}
+		tooltip="more"
+		tooltipPosition="bottom-left"
+	>
+		<MoreVertIcon color={"#D3D3D3"} />
+	</IconButton>
+);
 
 export default class translate extends React.Component {
 	constructor(props) {
@@ -22,7 +32,6 @@ export default class translate extends React.Component {
 
 	goToListing = (address) => {
 		this.props.history.push(`/listing/${address}`)
-		window.location.reload()
 	}
 
 	render() {
@@ -32,15 +41,16 @@ export default class translate extends React.Component {
 				items.push(<div>
 					<ListItem
 						key={i}
-						href={`https://the-bottom-line.herokuapp.com/listing/${listing.address}`}
-						primaryText={listing.address} />
-					<Button basic color='red' onClick={() => this.handleClick(listing.address)}> Unsave Listing</Button>
+						primaryText={listing.address}
+						rightIconButton={<IconMenu iconButtonElement={iconButtonElement}>
+							<MenuItem onClick={() => this.goToListing(listing.address)}>Go To Property</MenuItem>
+							<MenuItem onClick={() => this.handleClick(listing.address)}>Delete</MenuItem>
+						</IconMenu>}
+					/>
 				</div >
 				)
-			}
-			)
+			})
 		} else { null }
-
 		return (
 			<Card style={style}>
 				<CardTitle title='Saved Properties' subtitle="Here's a list of your recent searches. Click on any of them below to analyze the property again." />
@@ -52,7 +62,7 @@ export default class translate extends React.Component {
 	}
 }
 
-// rightAvatar = {<strong > { record.total }$</strong >}
+// rightAvatar = {<strong > {record.total}$</strong >}
 // leftAvatar = { customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar /> }
 
 
