@@ -16,7 +16,7 @@ const iconButtonElement = (
 		tooltip="more"
 		tooltipPosition="bottom-left"
 	>
-		<MoreVertIcon color={"#D3D3D3"} />
+		<MoreVertIcon color={"#A9A9A9"} />
 	</IconButton>
 );
 
