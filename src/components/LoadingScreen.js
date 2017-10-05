@@ -31,7 +31,7 @@ var Example = React.createClass({
     return (
       <div >
         <div style={style}><Spinner fadeIn="none" name="line-spin-fade-loader" /></div>
-        <h2 style={{ textAlign: "center" }}>Finding Property</h2>
+        <h2 style={{ textAlign: "center" }}>Finding Property...</h2>
       </div>
 
     );
