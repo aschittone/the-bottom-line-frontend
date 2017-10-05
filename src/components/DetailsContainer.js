@@ -55,7 +55,7 @@ class GridExampleCelled extends React.Component {
 		let fullPath = this.props.history.match.url.split("/")
 		let addressPath = fullPath[2].replace(/\./g, "")
 		console.log('fetching')
-		fetch(`https://rentroll-api.herokuapp.com//api/v1/listings/${addressPath}`)
+		fetch(`https://rentroll-api.herokuapp.com/api/v1/listings/${addressPath}`)
 			.then(res => {
 				if (res.status === 500) {
 					this.setState({
