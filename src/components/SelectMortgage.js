@@ -5,7 +5,12 @@ import MenuItem from 'material-ui/MenuItem';
 const items = [
   <MenuItem value={'30 Year Fixed Conventional'} primaryText={'30 Year Fixed Conventional'} />,
   <MenuItem value={'15 Year Fixed Conventional'} primaryText={'15 Year Fixed Conventional'} />,
-  <MenuItem value={'10 Year Fixed Conventional'} primaryText={'10 Year Fixed Conventional'} />
+  <MenuItem value={'10 Year Fixed Conventional'} primaryText={'10 Year Fixed Conventional'} />,
+  <MenuItem value={'7/1 ARM Conventional'} primaryText={'7/1 ARM Conventional'} />,
+  <MenuItem value={'5/1 ARM Conventional'} primaryText={'5/1 ARM Conventional'} />,
+  <MenuItem value={'3/1 ARM Conventional'} primaryText={'3/1 ARM Conventional'} />,
+
+
 ];
 /**
  * With the `maxHeight` property set, the Select Field will be scrollable

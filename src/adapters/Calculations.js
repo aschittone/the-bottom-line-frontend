@@ -14,6 +14,18 @@ export function getMortgage(type, dp, price) {
       r = 3.75
       n = 120
       break;
+    case "3/1 ARM Coneventional":
+      r = 3.75
+      n = 360
+      break;
+    case "5/1 ARM Coneventional":
+      r = 3.75
+      n = 360
+      break;
+    case "7/1 ARM Coneventional":
+      r = 3.25
+      n = 360
+      break;
     default:
       r = 4.5
   }
@@ -57,5 +69,5 @@ export function affordability(props, state, getMortgage, getMI) {
 }
 
 export function commas(num) {
- return parseFloat(num).toLocaleString()
+  return parseFloat(num).toLocaleString()
 }
