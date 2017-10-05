@@ -47,7 +47,7 @@ export default class ListExampleNested extends React.Component {
       return (
         <div>
           <List>
-            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate === undefined || typeof this.props[0].zestimate.amount !== "number" ? "N/A" : "$" + commas(this.props[0].zestimate.amount)}`} />
+            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate === undefined ? "N/A" : "$" + commas(this.props[0].zestimate.amount)}`} />
             <ListItem primaryText={`Estimated Rent: ${this.props[0].rentzestimate === undefined ? "N/A" : "$" + commas(this.props[2])}`} />
             <ListItem primaryText={`Rent Valuation Range: ${this.props[0].rentzestimate === undefined || this.props[0].rentzestimate.valuationRange.low === undefined ? "N/A" : "$" + commas(this.props[0].rentzestimate.valuationRange.low) + " - " + "$" + commas(this.props[0].rentzestimate.valuationRange.high)}`} />
             <ListItem primaryText="HOA Fees: N/A" />
@@ -64,7 +64,7 @@ export default class ListExampleNested extends React.Component {
       return (
         <div>
           <List>
-            <ListItem primaryText={`Estimated Value: $${this.props[0].zestimate === undefined || typeof this.props[0].zestimate.amount !== "number" ? "N/A" : "$" + commas(this.props[0].zestimate.amount)}`} />
+            <ListItem primaryText={`Estimated Value: ${this.props[0].zestimate === undefined ? "N/A" : "$" + commas(this.props[0].zestimate.amount)}`} />
             <ListItem primaryText={`Estimated Rent: ${this.props[0].rentzestimate === undefined ? "N/A" : "$" + commas(this.props[2])}`} />
             <ListItem primaryText={`Rent Valuation Range: ${this.props[0].rentzestimate === undefined || this.props[0].rentzestimate.valuationRange.low === undefined ? "N/A" : "$" + commas(this.props[0].rentzestimate.valuationRange.low) + " - " + "$" + commas(this.props[0].rentzestimate.valuationRange.high)}`} />
             <ListItem primaryText={`Living Space: ${this.props[0].finishedSqFt === undefined ? "N/A" : commas(this.props[0].finishedSqFt) + " sqft"}`} />
