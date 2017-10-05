@@ -23,6 +23,7 @@ export default class DialogExampleSimple extends React.Component {
   };
 
   goToListing = (address) => {
+    this.setState({ open: false });
     this.props.history.history.history.push(`/listing/${address}+second`)
     window.location.reload()
   }
