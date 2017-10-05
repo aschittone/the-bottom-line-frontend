@@ -174,7 +174,7 @@ class Table extends React.Component {
 							<h2 style={styles.headline}>Annual Cash flow: $<CountTo to={this.state.totals[0].totals.annualCashflow} speed={1234} /> </h2>
 						</Grid.Column>
 						<Grid.Column width={5}>
-							<h2 style={styles.headline}>Average Monthly Cash flow: $<CountTo to={this.state.totals[0].totals.averageMonthlyCashflow} speed={1234} /></h2>
+							<h2 style={styles.headline}>Average Cash flow/month: $<CountTo to={this.state.totals[0].totals.averageMonthlyCashflow} speed={1234} /></h2>
 						</Grid.Column>
 						<Grid.Column width={5}>
 							<h2 style={styles.headline}>Mortgage Payment (P&I): $<CountTo to={this.state.totals[0].totals.mortgagePayment} speed={1234} /></h2>

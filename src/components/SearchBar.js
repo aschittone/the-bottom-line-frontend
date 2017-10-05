@@ -67,7 +67,7 @@ class Demo extends React.Component {
 			value: this.state.address,
 			onChange: this.handleChange,
 			autoFocus: true,
-			placeholder: "Property Address to Analyze (must be an acutal street address)",
+			placeholder: "Property Address to Analyze (must be an actual street address)",
 			name: 'Demo__input',
 			id: "my-input-id",
 		}
