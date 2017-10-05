@@ -37,7 +37,6 @@ class translate extends React.Component {
 
         return (
             <Card style={styles.card}>
-                <CommentIcon style={styles.icon} />
                 <CardTitle title="Recent Searches" style={styles.titleLink} subtitle="Here's a list of your recent searches. Click on any of them below to analyze the property again." />
                 <List>
                     {recentSearches}

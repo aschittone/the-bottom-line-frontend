@@ -157,7 +157,7 @@ export default class TabsExampleControlled extends React.Component {
         <Tab label="Purchase Details" value="a" style={{ backgroundColor: '#191a1c' }}>
           <div>
             <h2 style={styles.headline}>Calculate cash flow based on purchase parameters</h2>
-            <h4>Enter the additional info below to fill in the table on the right, and calculate your cash flow. Once you click Calculate you can edit the grid to adjust the rent/expenses.</h4>
+            <h4>Enter the additional info below to fill in the table on the right, and calculate your cash flow. Once you click Calculate you can edit the grid to adjust the rent/expenses. (Mortgage products below are based off of current estimated market rates)</h4>
             <Grid padded relaxed>
               <Grid.Row>
                 <Grid.Column width={8}>

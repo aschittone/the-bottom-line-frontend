@@ -7,6 +7,7 @@ import CodeIcon from 'material-ui/svg-icons/action/code';
 import FlatButton from 'material-ui/FlatButton';
 import Auth from '../adapters/auth'
 import CountTo from 'react-count-to';
+import { Grid } from 'semantic-ui-react'
 
 
 const styles = {
@@ -51,15 +52,26 @@ class translate extends React.Component {
 					subtitle="Here's your most recent financial data that you've provided."
 					avatar={<Avatar backgroundColor="#FFEB3B" icon={<LightBulbIcon />} />}
 				/>
-				<div style={{ ...styles.financialInfo }}>
+				<div >
 					{this.state.financialData[0] === undefined ? <h3>Loading</h3> :
 						<div>
-							<h3>Average Annual Income: <CountTo to={parseInt(this.state.financialData[0].average_annual_income)} speed={1234} /></h3>
-							<h3>Assets: <CountTo to={parseInt(this.state.financialData[0].assets)} speed={1234} /></h3>
-							<h3>Total Debt/month: <CountTo to={parseInt(this.state.financialData[0].total_debt)} speed={1234} /></h3>
-							<h3>Credit Score: <CountTo to={parseInt(this.state.financialData[0].credit_score)} speed={1234} /></h3>
-						</div>
-					}
+							<Grid centered textAlign="center" verticalAlign="bottom">
+								<Grid.Row>
+									<Grid.Column width={3}>
+										<h3>Average Annual Income: $<CountTo to={parseInt(this.state.financialData[0].average_annual_income)} speed={1234} /></h3>
+									</Grid.Column>
+									<Grid.Column width={3}>
+										<h3>Assets: $<CountTo to={parseInt(this.state.financialData[0].assets)} speed={1234} /></h3>
+									</Grid.Column>
+									<Grid.Column width={3}>
+										<h3>Total Debt/month: $<CountTo to={parseInt(this.state.financialData[0].total_debt)} speed={1234} /></h3>
+									</Grid.Column>
+									<Grid.Column width={3}>
+										<h3>Credit Score: <CountTo to={parseInt(this.state.financialData[0].credit_score)} speed={1234} /></h3>
+									</Grid.Column>
+								</Grid.Row>
+							</Grid>
+						</div>}
 				</div>
 				<CardActions style={{ textAlign: 'right' }}>
 					<FlatButton label="search" icon={<HomeIcon />} href="https://the-bottom-line.herokuapp.com/" />

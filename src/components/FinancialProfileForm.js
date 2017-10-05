@@ -16,7 +16,7 @@ import { cyan500, pinkA200 } from 'material-ui/styles/colors';
 
 
 const styles = {
-form: {
+	form: {
 		padding: '0 1em 1em 1em',
 	},
 }
@@ -56,7 +56,7 @@ class Main extends React.Component {
 		}
 		this.props.saveData(userParams)
 
-	
+
 	}
 
 	notifyFormError(data) {
@@ -68,63 +68,75 @@ class Main extends React.Component {
 		return (
 			<div>
 				<MuiThemeProvider muiTheme={getMuiTheme()}>
-							<Formsy.Form
-								onValid={this.enableButton}
-								onInvalid={this.disableButton}
-								onValidSubmit={this.submitForm}
-								onInvalidSubmit={this.notifyFormError}>
-								<div style={styles.form}>
-										<FormsyText
-											name="averageAnnualIncome"
-											validations="isNumeric"
-											validationError={"Numbers only!"}
-											required
-											hintText="Average Annual Income (past 2 years)"
-											floatingLabelText="Average Annual Income (past 2 years)"
-											style = {{width: 350}}
-										/>
-									
-										<FormsyText
-											name="assets"
-											required
-											validations="isNumeric"
-											validationError={"Numbers only!"}
-											hintText="Assets (cash available for down payment)"
-											floatingLabelText="Assets (cash available for down payment)"
-											updateImmediately
-											style = {{width: 350}}
-										/>
+					<Formsy.Form
+						onValid={this.enableButton}
+						onInvalid={this.disableButton}
+						onValidSubmit={this.submitForm}
+						onInvalidSubmit={this.notifyFormError}>
+						<div style={styles.form}>
+							<FormsyText
+								name="averageAnnualIncome"
+								validations="isNumeric"
+								validationError={"Numbers only!"}
+								required
+								hintText="Average Annual Income (past 2 years)"
+								floatingLabelText="Average Annual Income (past 2 years)"
+								style={{ width: 350 }}
+								floatingLabelStyle={{ color: '#000' }}
+								floatingLabelFocusStyle={{ color: '#000' }}
+								underlineFocusStyle={{ borderColor: '#000' }}
+							/>
 
-										<FormsyText
-											name="totalDebt"
-											required
-											validations="isNumeric"
-											validationError={"Numbers only!"}
-											hintText="Total Debt payment (per month)"
-											floatingLabelText="Total Debt payment (per month)"
-											updateImmediately
-										/>
+							<FormsyText
+								name="assets"
+								required
+								validations="isNumeric"
+								validationError={"Numbers only!"}
+								hintText="Assets (cash available for down payment)"
+								floatingLabelText="Assets (cash available for down payment)"
+								updateImmediately
+								style={{ width: 350 }}
+								floatingLabelStyle={{ color: '#000' }}
+								floatingLabelFocusStyle={{ color: '#000' }}
+								underlineFocusStyle={{ borderColor: '#000' }}
+							/>
 
-										<FormsyText
-											name="creditScore"
-											required
-											validations="isNumeric,isLength:3"
-											validationError={"Must be 3 Numbers only!"}
-											hintText="Credit Score"
-											floatingLabelText="Credit Score"
-											updateImmediately
-										/>
-									<br></br>
-									<br></br>
-									<RaisedButton
-										type="submit"
-										label="Save"
-										disabled={!this.state.canSubmit}
-									/>
-									</div>
-								
-							</Formsy.Form>
-		
+							<FormsyText
+								name="totalDebt"
+								required
+								validations="isNumeric"
+								validationError={"Numbers only!"}
+								hintText="Total Debt payment (per month)"
+								floatingLabelText="Total Debt payment (per month)"
+								updateImmediately
+								floatingLabelStyle={{ color: '#000' }}
+								floatingLabelFocusStyle={{ color: '#000' }}
+								underlineFocusStyle={{ borderColor: '#000' }}
+							/>
+
+							<FormsyText
+								name="creditScore"
+								required
+								validations="isNumeric,isLength:3"
+								validationError={"Must be 3 Numbers only!"}
+								hintText="Credit Score"
+								floatingLabelText="Credit Score"
+								updateImmediately
+								floatingLabelStyle={{ color: '#000' }}
+								floatingLabelFocusStyle={{ color: '#000' }}
+								underlineFocusStyle={{ borderColor: '#000' }}
+							/>
+							<br></br>
+							<br></br>
+							<RaisedButton
+								type="submit"
+								label="Save"
+								disabled={!this.state.canSubmit}
+							/>
+						</div>
+
+					</Formsy.Form>
+
 				</MuiThemeProvider>
 			</div >
 		);

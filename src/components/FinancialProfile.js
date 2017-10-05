@@ -22,7 +22,6 @@ class translate extends React.Component {
     render() {
         return (
             <Card style={styles.card}>
-                <CustomerIcon style={styles.icon} />
                 <CardTitle title="Financial Profile" subtitle="Fill out the form below to receive mortgage advise when browsing properties." />
                 <FinancialProfileForm saveData={this.props.saveData}/>
             </Card>
