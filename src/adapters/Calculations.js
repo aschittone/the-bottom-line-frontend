@@ -14,15 +14,15 @@ export function getMortgage(type, dp, price) {
       r = 3.75
       n = 120
       break;
-    case "3/1 ARM Coneventional":
+    case "3/1 ARM Conventional":
       r = 3.75
       n = 360
       break;
-    case "5/1 ARM Coneventional":
+    case "5/1 ARM Conventional":
       r = 3.75
       n = 360
       break;
-    case "7/1 ARM Coneventional":
+    case "7/1 ARM Conventional":
       r = 3.25
       n = 360
       break;
