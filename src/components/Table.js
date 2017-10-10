@@ -143,7 +143,6 @@ class Table extends React.Component {
 	handleGridRowsUpdated({ fromRow, toRow, updated }) {
 		let rows = this.state.rows;
 		for (let i = fromRow; i <= toRow; i++) {
-
 			let rowToUpdate = rows[i];
 			let updatedRow = update(rowToUpdate, { $merge: updated });
 			for (let key in updated) {

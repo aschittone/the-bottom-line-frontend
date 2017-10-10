@@ -33,7 +33,6 @@ class GridListExampleSimple extends React.Component {
 			let a = JSON.stringify([address]);
 			localStorage.setItem('search', a);
 		} else if (localStorage.getItem('token') && localStorage.getItem('search')) {
-
 			let searches = JSON.parse(localStorage.getItem('search'))
 			searches.push(address)
 			localStorage.setItem('search', JSON.stringify(searches));

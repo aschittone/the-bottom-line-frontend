@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 function authorize(RenderedComponent, props) {
 
 	return class extends React.Component {
@@ -16,6 +15,5 @@ function authorize(RenderedComponent, props) {
 		}
 	}
 }
-
 
 export default authorize
