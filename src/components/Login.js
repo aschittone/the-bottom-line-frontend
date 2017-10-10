@@ -100,11 +100,7 @@ class Main extends React.Component {
 					localStorage.getItem('lastUrl') ? localStorage.getItem('lastUrl') : localStorage.setItem('lastUrl', window.location)
 					let url = localStorage.getItem('lastUrl')
 					let split = url.split("/")
-					if (split[3] === "listing") {
-						this.props.history.go(-1)
-					} else {
-						this.props.history.push('/')
-					}
+					split[3] === "listing" ? this.props.history.go(-1) : this.props.history.push('/')
 				} else {
 					this.setState({
 						errorMsg: res.msg
