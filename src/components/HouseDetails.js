@@ -15,10 +15,6 @@ import IconButton from 'material-ui/IconButton';
 import { commas } from '../adapters/Calculations'
 
 
-
-
-
-
 export default class ListExampleNested extends React.Component {
   constructor(props) {
     super(props)

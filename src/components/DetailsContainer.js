@@ -77,14 +77,13 @@ class GridExampleCelled extends React.Component {
 	}
 
 	render() {
-
 		if (this.state.data !== undefined && this.state.data.status === 500) {
 			return (<div><SearchBar /><Alert history={this.props.history} /></div>)
 		} else if (this.state.data !== undefined && typeof this.state.data[0] === "string") {
 			return (<div><SearchBar /> <AdditionalPropertyModal data={this.state} history={this.props} /></div>)
 		} else if (this.state.data !== undefined) {
 			return (
-				<div className="backround" style={{ paddingTop: 64 }}>
+				<div className="backround" style={{ paddingTop: 64 }} >
 					< Grid columns='equal' padded relaxed >
 						<Grid.Row>
 							<Grid.Column width={5}>
@@ -111,7 +110,7 @@ class GridExampleCelled extends React.Component {
 			)
 		} else {
 			return (
-				<div style={{ ...styles.main }} className='page-wrapper div-with-bg'>
+				<div style={{ ...styles.main }} className='page-wrapper div-with-bg' >
 					<div className="blur"></div>
 					<Card style={styles.card}>
 						<div style={styles.loading}>
