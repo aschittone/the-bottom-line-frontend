@@ -83,9 +83,6 @@ export default class TabsExampleControlled extends React.Component {
     this.props.submitForAnalysis(price, mortgage, dp, HOI, HOA)
   };
 
-
-
-
   componentWillMount() {
     if (localStorage.getItem("token")) {
       Auth.getFinancialData()
@@ -100,8 +97,6 @@ export default class TabsExampleControlled extends React.Component {
       })
     }
   }
-
-
 
   render() {
     let advice;

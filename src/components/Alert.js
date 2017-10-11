@@ -40,7 +40,7 @@ export default class DialogExampleAlert extends React.Component {
 					open={this.state.open}
 					onRequestClose={this.handleClose}
 				>
-					Property not found, please make sure you enter the address correctly.
+					Unfortunately, we do not have any records for this property. Please search for another address.
 
         </Dialog>
 			</div>

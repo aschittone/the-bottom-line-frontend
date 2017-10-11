@@ -11,7 +11,7 @@ import 'semantic-ui-css/semantic.min.css';
 
 
 ReactDOM.render(
-	<Router>
+	<Router >
 		<div>
 			<App />
 		</div>
