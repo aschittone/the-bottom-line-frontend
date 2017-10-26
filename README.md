@@ -6,6 +6,10 @@
  # Project Demo
 
    https://the-bottom-line.herokuapp.com/
+   
+ # Backend Repo
+ 
+  https://github.com/aschittone/the-bottom-line-backend
 
  # Main Features
 
