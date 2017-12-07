@@ -29,6 +29,7 @@ class Demo extends React.Component {
 	}
 
 	handleSelect(address) {
+		debugger
 		if (localStorage.getItem('token') && !localStorage.getItem('search')) {
 			let a = JSON.stringify([address]);
 			localStorage.setItem('search', a);
@@ -41,6 +42,7 @@ class Demo extends React.Component {
 	}
 
 	handleChange(address) {
+		
 		console.log(address)
 		this.setState({
 			address,
