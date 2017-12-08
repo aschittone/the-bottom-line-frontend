@@ -21,53 +21,53 @@ class Table extends React.Component {
 		super(props)
 		this.state = {
 			columns:
-			[
-				{
-					key: 'Month',
-					name: 'Month',
-					editable: false
-				},
-				{
-					key: 'Rent',
-					name: 'Rent',
-					editable: true
-				},
-				{
-					key: 'HOA',
-					name: 'HOA Fee',
-					editable: true
-				},
-				{
-					key: 'Taxes',
-					name: 'Taxes',
-					editable: true
-				},
-				{
-					key: 'MFee',
-					name: 'MISC Fees',
-					editable: true
-				},
-				{
-					key: 'MI',
-					name: 'Mortgage Insurance',
-					editable: true
-				},
-				{
-					key: 'HOI',
-					name: 'HOI',
-					editable: true
-				},
-				{
-					key: 'Mortgage',
-					name: 'Mortgage',
-					editable: false
-				},
-				{
-					key: 'CashFlow',
-					name: 'Cash flow/month',
-					editable: false
-				}
-			],
+				[
+					{
+						key: 'Month',
+						name: 'Month',
+						editable: false
+					},
+					{
+						key: 'Rent',
+						name: 'Rent',
+						editable: true
+					},
+					{
+						key: 'HOA',
+						name: 'HOA Fee',
+						editable: true
+					},
+					{
+						key: 'Taxes',
+						name: 'Taxes',
+						editable: true
+					},
+					{
+						key: 'MFee',
+						name: 'MISC Fees',
+						editable: true
+					},
+					{
+						key: 'MI',
+						name: 'Mortgage Insurance',
+						editable: true
+					},
+					{
+						key: 'HOI',
+						name: 'HOI',
+						editable: true
+					},
+					{
+						key: 'Mortgage',
+						name: 'Mortgage',
+						editable: false
+					},
+					{
+						key: 'CashFlow',
+						name: 'Cash flow/month',
+						editable: false
+					}
+				],
 			rows: this.createRows(12, this.props)[0].newRows,
 			totals: this.createRows(12, this.props)[1].newTotals
 		}
@@ -180,6 +180,8 @@ class Table extends React.Component {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
+
+				// this is the react package being used. SEE node_modules REACT-DATA-GRID
 				<ReactDataGrid
 					enableCellSelect={true}
 					columns={this.state.columns}
@@ -188,6 +190,8 @@ class Table extends React.Component {
 					minHeight={500}
 					onGridRowsUpdated={this.handleGridRowsUpdated} />
 			</div>
+
+
 		);
 	}
 }

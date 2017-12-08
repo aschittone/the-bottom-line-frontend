@@ -180,40 +180,4 @@ class Main extends React.Component {
 	}
 }
 
-// <MuiThemeProvider muiTheme={muiTheme}>
-// 	<div style={{ ...styles.main, backgroundColor: primary1Color }}>
-// 		<Card style={styles.card}>
-// 			<div style={styles.avatar}>
-// 				<Avatar backgroundColor={accent1Color} icon={<LockIcon />} size={60} />
-// 			</div>
-// 			<form onSubmit={handleSubmit(this.login)}>
-// 				<div style={styles.form}>
-// 					<p style={styles.hint}>Hint: demo / demo</p>
-// 					<div style={styles.input} >
-// 						<Field
-// 							name="username"
-// 							component={renderInput}
-// 							floatingLabelText={translate('aor.auth.username')}
-// 						/>
-// 					</div>
-// 					<div style={styles.input}>
-// 						<Field
-// 							name="password"
-// 							component={renderInput}
-// 							floatingLabelText={translate('aor.auth.password')}
-// 							type="password"
-// 						/>
-// 					</div>
-// 				</div>
-// 				<CardActions>
-// 					<RaisedButton type="submit" primary disabled={submitting} label={translate('aor.auth.sign_in')} fullWidth />
-// 				</CardActions>
-// 			</form>
-// 		</Card>
-// 		<Notification />
-// 	</div>
-// </MuiThemeProvider>
-
-
-
 export default Main;

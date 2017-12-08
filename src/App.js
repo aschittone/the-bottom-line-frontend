@@ -9,12 +9,6 @@ import Footer from './components/Footer'
 
 class App extends Component {
 
-  // componentWillMount() {
-  //   if (window.innerHeight < 680 || window.innerWidth < 726) {
-  //     document.body.style.zoom = .75
-  //   }
-  // }
-
   render() {
     return (
       <MuiThemeProvider>

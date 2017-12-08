@@ -1,5 +1,7 @@
 class Auth {
+	// Auth adapter for user authentication (used in other files)
 
+	// fetches to backend to log user in
 	static login(userParams) {
 		const userJSON = JSON.stringify(userParams)
 		return fetch('https://rentroll-api.herokuapp.com/api/v1/login', {
@@ -13,6 +15,7 @@ class Auth {
 			.then(res => res.json())
 	}
 
+	// fetches to backend to sign user up
 	static signup(userParams) {
 		const userJSON = JSON.stringify(userParams)
 		return fetch('https://rentroll-api.herokuapp.com/api/v1/users', {
@@ -26,6 +29,7 @@ class Auth {
 			.then(res => res.json())
 	}
 
+	// fetches to backend for user info
 	static me() {
 		const jwtToken = localStorage.getItem("token")
 		return fetch('https://rentroll-api.herokuapp.com/api/v1/me', {
@@ -37,6 +41,7 @@ class Auth {
 			.then(res => res.json())
 	}
 
+	// fetches to backend to save user listing
 	static save(userListingParams) {
 		const userJSON = JSON.stringify(userListingParams)
 		const jwtToken = localStorage.getItem("token")
@@ -52,6 +57,7 @@ class Auth {
 			.then(res => res.json())
 	}
 
+	// deletes user info
 	static delete(userListingParams) {
 		const userJSON = JSON.stringify(userListingParams)
 		const jwtToken = localStorage.getItem("token")

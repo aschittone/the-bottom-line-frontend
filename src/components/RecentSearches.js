@@ -16,7 +16,6 @@ const styles = {
 
 class translate extends React.Component {
 
-
     render() {
         let recentSearches;
         if (localStorage.getItem('token') && !localStorage.getItem('search')) {
@@ -48,5 +47,3 @@ class translate extends React.Component {
 
 
 export default translate
-
-    // leftAvatar={customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar />}

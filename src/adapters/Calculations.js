@@ -1,3 +1,4 @@
+// gets the mortgage payment per month
 export function getMortgage(type, dp, price) {
   let r;
   let n;
@@ -35,6 +36,7 @@ export function getMortgage(type, dp, price) {
   return Math.round(payment, 2)
 }
 
+// gets mortgage insurance amount
 export function getMI(dp, price) {
   let loanAmount = (((100 - parseFloat(dp)) / 100) * price)
   let MI;
@@ -50,13 +52,12 @@ export function getMI(dp, price) {
   return Math.round(MI, 2)
 }
 
-
+// returns all info to be used to determine affordabiltiy for user and specific property/purchase params
 export function affordability(props, state, getMortgage, getMI) {
   let mortgage = getMortgage(props.mortgage, props.downPayment, props.purchasePrice)
   let mi = getMI(props.downPayment, props.purchasePrice)
   let HOA = parseInt(state.HOA)
   let HOI = parseInt(state.HOI)
-
   let taxes = props.data[3] === "tax data not available" ? 0 : (JSON.parse(props.data[3].body).property[0].assessment.tax.taxamt / 12)
   let downpayment = (parseInt(props.downPayment) / 100) * parseInt(props.purchasePrice)
   let income = (parseInt(state.financialData[0].average_annual_income) / 12)
@@ -68,6 +69,7 @@ export function affordability(props, state, getMortgage, getMI) {
   return [{ income: income, housingPayment: housingPayment, debts: debts, mortgage: mortgage, mi: mi, hoa: HOA, hoi: HOI, taxes: taxes, downpayment: downpayment, credit: credit, assets: assets, rent: rent }]
 }
 
+// formats numbers correctly for display
 export function commas(num) {
   return parseFloat(num).toLocaleString()
 }

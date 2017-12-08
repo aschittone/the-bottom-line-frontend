@@ -1,5 +1,3 @@
-// <StreetView lng={parseFloat(this.props.data[0].address.longitude)} lat={parseFloat(this.props.data[0].address.latitude)} />
-// position: { lat: this.props.lat, lng: this.props.lng },
 import React, { PropTypes } from "react"
 import { compose, withProps, withState, withHandlers } from "recompose";
 import {

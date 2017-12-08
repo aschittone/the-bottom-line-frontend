@@ -62,7 +62,3 @@ export default class translate extends React.Component {
 	}
 }
 
-// rightAvatar = {<strong > {record.total}$</strong >}
-// leftAvatar = { customers[record.customer_id] ? <Avatar src={`${customers[record.customer_id].avatar}?size=32x32`} /> : <Avatar /> }
-
-

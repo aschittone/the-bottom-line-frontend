@@ -17,24 +17,16 @@ class translate extends React.Component {
     constructor(props) {
         super(props)
     }
-    
-    
+
+
     render() {
         return (
             <Card style={styles.card}>
                 <CardTitle title="Financial Profile" subtitle="Fill out the form below to receive mortgage advise when browsing properties." />
-                <FinancialProfileForm saveData={this.props.saveData}/>
+                <FinancialProfileForm saveData={this.props.saveData} />
             </Card>
         )
     }
 }
 
 export default translate
-
-        // <List>
-        //     {visitors.map(record =>
-        //         <ListItem href={`#/customers/${record.id}`} key={record.id} leftAvatar={<Avatar src={`${record.avatar}?size=32x32`} />} >
-        //             {record.first_name} {record.last_name}
-        //         </ListItem>
-        //     )}
-        // </List>
