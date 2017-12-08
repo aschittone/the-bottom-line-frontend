@@ -180,8 +180,7 @@ class Table extends React.Component {
 						</Grid.Column>
 					</Grid.Row>
 				</Grid>
-
-				// this is the react package being used. SEE node_modules REACT-DATA-GRID
+		
 				<ReactDataGrid
 					enableCellSelect={true}
 					columns={this.state.columns}
